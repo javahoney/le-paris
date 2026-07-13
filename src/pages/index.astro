@@ -10,6 +10,7 @@ import photo3 from '../assets/photo-gallery-3.webp';
 import photo4 from '../assets/photo-gallery-4.webp';
 import photo5 from '../assets/photo-gallery-5.webp';
 import photo6 from '../assets/photo-gallery-6.webp';
+import { buildRestaurantSchema } from '../data/schema';
 
 const galleryImages = [
   { src: photo1, alt: "Pavé de saumon grillé sur lit de spaghettis, servi au restaurant Le Pari's à Orléans" },
@@ -26,6 +27,7 @@ const galleryImages = [
   description="Bar-restaurant convivial au cœur d'Orléans : cuisine maison généreuse, large choix de boissons et soirées karaoké, dans une ambiance familiale et chaleureuse."
   active="accueil"
   ogImage={photo3}
+  jsonLd={buildRestaurantSchema()}
 >
   <FloatingBadge label="Réserver une table" phone="02 38 53 29 34" variant="green" />
 

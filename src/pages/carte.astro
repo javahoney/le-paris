@@ -7,6 +7,7 @@ import FloatingBadge from '../components/FloatingBadge.astro';
 import rawMenu from '../data/menu.json';
 import type { MenuData } from '../data/types';
 import photo1 from '../assets/photo-gallery-1.webp';
+import { buildMenuSchema } from '../data/schema';
 
 const menu = rawMenu as MenuData;
 ---
@@ -16,6 +17,7 @@ const menu = rawMenu as MenuData;
   description="Découvrez la carte du Pari's à Orléans : plats faits maison, boissons chaudes, bières, vins et cocktails. Plat du jour à 11,90€, en centre-ville d'Orléans."
   active="carte"
   ogImage={photo1}
+  jsonLd={buildMenuSchema(menu)}
 >
   <FloatingBadge label="Réserver une table" phone="02 38 53 29 34" variant="green" />
 
