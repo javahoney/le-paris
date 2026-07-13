@@ -6,11 +6,17 @@ import MenuCategoryCard from '../components/menu/MenuCategoryCard.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
 import rawMenu from '../data/menu.json';
 import type { MenuData } from '../data/types';
+import photo1 from '../assets/photo-gallery-1.webp';
 
 const menu = rawMenu as MenuData;
 ---
 
-<Layout title="La Carte — Le Pari's" active="carte">
+<Layout
+  title="La Carte — Le Pari's, Orléans"
+  description="Découvrez la carte du Pari's à Orléans : plats faits maison, boissons chaudes, bières, vins et cocktails. Plat du jour à 11,90€, en centre-ville d'Orléans."
+  active="carte"
+  ogImage={photo1}
+>
   <FloatingBadge label="Réserver une table" phone="02 38 53 29 34" variant="green" />
 
   <div class="page-hero">

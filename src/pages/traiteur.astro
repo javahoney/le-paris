@@ -8,6 +8,7 @@ import Gallery from '../components/Gallery.astro';
 import PrestaCard from '../components/traiteur/PrestaCard.astro';
 import MenuItemRow from '../components/menu/MenuItemRow.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
+import photo4 from '../assets/photo-gallery-4.webp';
 
 const formules = [
   { name: 'Plateau repas individuel', price: 'sur devis' },
@@ -23,8 +24,9 @@ const devisHref = "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su
 
 <Layout
   title="Traiteur à Orléans et alentours — Le Pari's"
-  description="Le Pari's, bar-restaurant à Orléans, propose ses services de traiteur pour vos événements professionnels et privés : mariages, anniversaires, cocktails d'entreprise, buffets. Devis gratuit."
+  description="Le Pari's, bar-restaurant à Orléans, propose ses services de traiteur pour mariages, anniversaires et événements d'entreprise, à Orléans et alentours."
   active="traiteur"
+  ogImage={photo4}
 >
   <FloatingBadge label="Demander un devis" phone="02 38 53 29 34" variant="orange" />
 

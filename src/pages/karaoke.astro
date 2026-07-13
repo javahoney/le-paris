@@ -5,12 +5,19 @@ import FloatingBadge from '../components/FloatingBadge.astro';
 import SearchBox from '../components/karaoke/SearchBox.astro';
 import SongRow from '../components/karaoke/SongRow.astro';
 import songs from '../data/karaoke.json';
+import ogKaraoke from '../assets/og-karaoke.webp';
 
 const PAGE_SIZE = 50;
 const firstPage = songs.slice(0, PAGE_SIZE);
 ---
 
-<Layout title="Karaoké — Le Pari's" theme="dark" active="karaoke">
+<Layout
+  title="Karaoké à Orléans — Le Pari's"
+  description="Soirée karaoké au Pari's, bar-restaurant à Orléans : plus de 900 chansons à chanter entre amis, dans une ambiance conviviale et sans prise de tête garantie."
+  theme="dark"
+  active="karaoke"
+  ogImage={ogKaraoke}
+>
   <div class="page-hero">
     <HandTag>Soirée karaoké</HandTag>
     <h1 class="pd">La Liste</h1>
