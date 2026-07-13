@@ -7,10 +7,11 @@ interface Props {
   title: string;
   ctaLabel?: string;
   ctaHref?: string;
+  ctaTarget?: '_blank';
   count?: number;
 }
 
-const { eyebrow, title, ctaLabel, ctaHref, count = 6 } = Astro.props;
+const { eyebrow, title, ctaLabel, ctaHref, ctaTarget, count = 6 } = Astro.props;
 ---
 
 <div class="section">
@@ -25,7 +26,7 @@ const { eyebrow, title, ctaLabel, ctaHref, count = 6 } = Astro.props;
     </div>
     {ctaLabel && ctaHref && (
       <div class="gallery__cta">
-        <Button href={ctaHref} variant="primary">{ctaLabel}</Button>
+        <Button href={ctaHref} variant="primary" target={ctaTarget}>{ctaLabel}</Button>
       </div>
     )}
   </div>

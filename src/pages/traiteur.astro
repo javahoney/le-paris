@@ -18,7 +18,7 @@ const formules = [
 
 const zones = ['Orléans', 'Saint-Jean-de-Braye', 'Olivet', 'Saran', 'Fleury-les-Aubrais', 'La Chapelle-Saint-Mesmin', 'Saint-Jean-le-Blanc', 'Ingré'];
 
-const devisMailto = "mailto:leparisbarorleans@gmail.com?subject=Demande%20de%20devis%20traiteur%20-%20Le%20Pari%27s&body=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20un%20devis%20pour%20une%20prestation%20traiteur.%0A%0AVoici%20les%20d%C3%A9tails%20de%20mon%20%C3%A9v%C3%A9nement%20%3A%0A-%20Date%20%3A%0A-%20Nombre%20d%27invit%C3%A9s%20%3A%0A-%20Lieu%20%3A%0A-%20Type%20d%27%C3%A9v%C3%A9nement%20(mariage%2C%20anniversaire%2C%20entreprise...)%20%3A%0A-%20Budget%20approximatif%20%3A%0A%0AMerci%20de%20me%20recontacter%20pour%20en%20discuter.%0A%0ACordialement%2C";
+const devisHref = "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su=Demande+de+devis+traiteur+-+Le+Pari%27s&to=leparisbarorleans@gmail.com&body=Bonjour,%0A%0AJe+souhaite+obtenir+un+devis+pour+une+prestation+traiteur.%0A%0AVoici+les+d%C3%A9tails+de+mon+%C3%A9v%C3%A9nement+:%0A-+Date+:%0A-+Nombre+d%27invit%C3%A9s+:%0A-+Lieu+:%0A-+Type+d%27%C3%A9v%C3%A9nement+(mariage,+anniversaire,+entreprise...)+:%0A-+Budget+approximatif+:%0A%0AMerci+de+me+recontacter+pour+en+discuter.%0A%0ACordialement,";
 ---
 
 <Layout
@@ -33,7 +33,7 @@ const devisMailto = "mailto:leparisbarorleans@gmail.com?subject=Demande%20de%20d
     <h1 class="pd">Traiteur à Orléans<br />et ses alentours</h1>
     <p class="hero__sub">Les recettes du Pari's, livrées ou dressées sur place pour vos événements professionnels et privés : mariages, anniversaires, cocktails d'entreprise, buffets.</p>
     <div class="hero__ctas">
-      <Button href={devisMailto} variant="primary" target="_blank">Demander un devis</Button>
+      <Button href={devisHref} variant="primary" target="_blank">Demander un devis</Button>
     </div>
   </div>
 
@@ -80,13 +80,13 @@ const devisMailto = "mailto:leparisbarorleans@gmail.com?subject=Demande%20de%20d
           ))}
         </div>
         <div class="cta">
-          <Button href={devisMailto} variant="secondary" onDark target="_blank">Nous écrire pour un devis</Button>
+          <Button href={devisHref} variant="secondary" onDark target="_blank">Nous écrire pour un devis</Button>
         </div>
       </div>
     </div>
   </div>
 
-  <Gallery eyebrow="quelques réalisations" title="Nos événements" ctaLabel="Demander un devis" ctaHref="tel:0238532934" />
+  <Gallery eyebrow="quelques réalisations" title="Nos événements" ctaLabel="Demander un devis" ctaHref={devisHref} ctaTarget="_blank" />
 
   <div class="section">
     <div class="wrap">
