@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Carte — La Pari's (v3)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Permanent+Marker&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Work Sans',sans-serif; background:#FBF3E7; color:#3A1F1F; }
+  .pd { font-family:'Cormorant Garamond',serif; }
+  .hand { font-family:'Permanent Marker',cursive; }
+
+  .wrap { max-width:1000px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  .nav { background:#FBF3E7; border-bottom:2px solid #E8821E22; }
+  .nav__inner { max-width:1000px; margin:0 auto; padding:20px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .nav__logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.7rem; color:#7A1735; }
+  .nav__links { display:flex; gap:8px; }
+  .navlink { font-weight:600; font-size:0.85rem; text-decoration:none; color:#7A1735; background:#fff; padding:8px 18px; border-radius:0; border:1.5px solid #7A173522; transition:.2s; }
+  .navlink.active, .navlink:hover { background:#7A1735; color:#FBF3E7; border-color:#7A1735; }
+
+  /* HERO */
+  .page-hero { text-align:center; padding:56px 24px 8px; position:relative; }
+  .page-hero .hand-tag { font-family:'Permanent Marker',cursive; font-weight:400; font-size:1.15rem; color:#E8821E; display:block; transform:rotate(-3deg); margin-bottom:2px; }
+  .page-hero h1 { font-size:clamp(3.2rem,8vw,4.4rem); color:#7A1735; font-weight:700; }
+  .brush { display:block; margin:10px auto 0; width:160px; height:20px; }
+
+  /* CATEGORY QUICK NAV */
+  .cat-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:24px 24px 48px; }
+  .cat-chip { font-weight:600; font-size:0.85rem; background:#fff; color:#5C3A21; padding:9px 18px; border-radius:0; text-decoration:none; border:1.5px solid #5C3A2122; transition:.2s; }
+  .cat-chip:hover { background:#E8821E; color:#fff; border-color:#E8821E; }
+
+  /* PLATS - highlighted card, full width, distinct */
+  .plats-card { background:radial-gradient(circle at 15% 15%, #8a1e3f 0%, #7A1735 45%, #6b1430 100%); border-radius:0; padding:36px 40px; margin-bottom:56px; position:relative; overflow:hidden; box-shadow:0 8px 28px rgba(122,23,53,0.25); }
+  .plats-card .hand-tag { color:#FBF3E7; }
+  .plats-card h2 { color:#FBF3E7; font-size:2.3rem; font-weight:700; margin-bottom:22px; }
+  .plats-card .item-row .item-name { color:#FBF3E7; }
+  .plats-card .item-row .leader { border-bottom-color:#FBF3E766; }
+  .plats-card .item-row .item-note { color:#F3E4D299; }
+  .plats-card .item-row.featured-row .item-name { color:#FFFFFF; text-transform:uppercase; letter-spacing:0.03em; }
+  .plats-card .item-price { color:#FFFFFF; font-weight:700; }
+
+  /* DRINK CATEGORY CARDS */
+  .categories { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding-bottom:64px; }
+  .cat-card { background:linear-gradient(160deg, #ffffff 0%, #fdf8f1 100%); border-radius:0; padding:28px 30px; box-shadow:0 2px 14px rgba(122,23,53,0.08), inset 0 0 0 1px rgba(122,23,53,0.04); scroll-margin-top:24px; position:relative; overflow:hidden; }
+  .eyebrow-sm { font-family:'Permanent Marker',cursive; font-weight:400; font-size:0.85rem; color:#E8821E; display:block; margin-bottom:10px; }
+  .cat-title { margin-bottom:18px; position:relative; z-index:1; }
+  .cat-title h2 { font-size:1.65rem; color:#7A1735; font-weight:700; }
+
+  /* BACKGROUND THEME ICONS */
+  .card-icon { position:absolute; z-index:0; pointer-events:none; transform:rotate(-14deg); }
+  .card-icon.light { color:#7A1735; opacity:0.07; }
+  .card-icon.dark { color:#FBF3E7; opacity:0.10; }
+  .icon-plats { top:-42px; right:-38px; width:280px; height:280px; }
+  .icon-chaudes { bottom:-40px; right:-40px; width:200px; height:200px; }
+  .icon-aperitifs { bottom:-34px; right:-26px; width:180px; height:180px; }
+  .icon-bieres { bottom:-42px; right:-34px; width:210px; height:210px; }
+  .icon-vins { bottom:-36px; right:-28px; width:195px; height:195px; }
+  .icon-softs { bottom:-36px; right:-34px; width:200px; height:200px; }
+  .icon-cocktails { bottom:-32px; right:-22px; width:185px; height:185px; }
+  .cat-card .item-row, .plats-card .item-row { position:relative; z-index:1; }
+
+  .item-row { display:flex; align-items:baseline; gap:8px; margin-bottom:19px; }
+  .item-row:last-child { margin-bottom:0; }
+  .item-name { font-weight:400; font-size:0.94rem; color:#3A1F1F; white-space:nowrap; }
+  .item-note { font-size:0.75rem; color:#8a6a5a; font-style:italic; margin-left:2px; }
+  .leader { flex:1; border-bottom:1.5px dotted #5C3A2144; margin-bottom:4px; min-width:14px; }
+  .item-price { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.1rem; color:#6b625c; white-space:nowrap; }
+
+  @media (max-width:760px){
+    .categories { grid-template-columns:1fr; }
+    .nav__links{ display:none; }
+    .plats-card{ padding:28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav__inner">
+    <div class="nav__logo">Le Pari's</div>
+    <div class="nav__links">
+      <a class="navlink" href="#">Accueil</a>
+      <a class="navlink active" href="#">Carte</a>
+      <a class="navlink" href="#">Karaoké</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-hero">
+  <span class="hand-tag">fait avec amour</span>
+  <h1 class="pd">La Carte</h1>
+  <svg class="brush" viewBox="0 0 160 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 12 Q 30 2, 55 11 T 110 10 T 156 8" stroke="#E8821E" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<nav class="cat-nav">
+  <a class="cat-chip" href="#plats">Plats</a>
+  <a class="cat-chip" href="#chaudes">Boissons chaudes</a>
+  <a class="cat-chip" href="#aperitifs">Apéritifs</a>
+  <a class="cat-chip" href="#bieres">Bières</a>
+  <a class="cat-chip" href="#vins">Vins & Grignotage</a>
+  <a class="cat-chip" href="#softs">Softs & Sodas</a>
+  <a class="cat-chip" href="#cocktails">Cocktails</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="plats-card" id="plats">
+    <svg class="card-icon dark icon-plats" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+      <path d="M30 10v35c0 6-8 6-8 0V10M22 10v20M38 10v35"/>
+      <path d="M38 10v80"/>
+      <path d="M70 10c-10 0-14 10-14 22s4 14 14 14v34"/>
+    </svg>
+    <span class="eyebrow-sm">à manger</span>
+    <h2 class="pd">Les Plats</h2>
+    <div class="item-row featured-row"><span class="item-name">Plat du jour</span><span class="leader"></span><span class="item-price">11,90€</span></div>
+    <div class="item-row"><span class="item-name">Steak haché façon bouchère <span class="item-note">125g</span></span><span class="leader"></span><span class="item-price">11,90€</span></div>
+    <div class="item-row"><span class="item-name">Fish and chips</span><span class="leader"></span><span class="item-price">14,90€</span></div>
+    <div class="item-row"><span class="item-name">Pièce du boucher <span class="item-note">180g</span></span><span class="leader"></span><span class="item-price">14,90€</span></div>
+  </div>
+
+  <div class="categories">
+
+    <section class="cat-card" id="chaudes">
+      <svg class="card-icon light icon-chaudes" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M20 40h50v22c0 12-11 20-25 20s-25-8-25-20V40z"/>
+        <path d="M70 45h6c6 0 10 5 10 11s-4 11-10 11h-6"/>
+        <path d="M32 30c-3-4 3-6 0-12M45 30c-3-4 3-6 0-12"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire</span><h2 class="pd">Boissons chaudes</h2></div>
+      <div class="item-row"><span class="item-name">Café / Décaféiné</span><span class="leader"></span><span class="item-price">1,70€</span></div>
+      <div class="item-row"><span class="item-name">Café allongé</span><span class="leader"></span><span class="item-price">2,00€</span></div>
+      <div class="item-row"><span class="item-name">Grand café</span><span class="leader"></span><span class="item-price">3,00€</span></div>
+      <div class="item-row"><span class="item-name">Cappuccino</span><span class="leader"></span><span class="item-price">3,20€</span></div>
+      <div class="item-row"><span class="item-name">Chocolat</span><span class="leader"></span><span class="item-price">2,80€</span></div>
+      <div class="item-row"><span class="item-name">Thé / Infusion</span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Verre de lait <span class="item-note">20cl</span></span><span class="leader"></span><span class="item-price">1,00€</span></div>
+    </section>
+
+    <section class="cat-card" id="aperitifs">
+      <svg class="card-icon light icon-aperitifs" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M30 20h40l-8 55c0 8-24 8-24 0L30 20z"/>
+        <path d="M25 20h50"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire</span><h2 class="pd">Apéritifs</h2></div>
+      <div class="item-row"><span class="item-name">Kir pétillant <span class="item-note">10cl</span></span><span class="leader"></span><span class="item-price">4,50€</span></div>
+      <div class="item-row"><span class="item-name">Kir <span class="item-note">10cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Whisky Clan Campbell <span class="item-note">4cl</span></span><span class="leader"></span><span class="item-price">5,00€</span></div>
+      <div class="item-row"><span class="item-name">Vodka <span class="item-note">4cl</span></span><span class="leader"></span><span class="item-price">5,00€</span></div>
+      <div class="item-row"><span class="item-name">Ricard / Pastis <span class="item-note">2cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Baby <span class="item-note">2cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Get 27 ou 31</span><span class="leader"></span><span class="item-price">4,00€</span></div>
+    </section>
+
+    <section class="cat-card" id="bieres">
+      <svg class="card-icon light icon-bieres" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M22 32h42v42c0 8-8 12-21 12s-21-4-21-12V32z"/>
+        <path d="M64 40h8c6 0 10 5 10 12s-4 12-10 12h-8"/>
+        <path d="M25 32c0-8 4-14 4-14M35 32c0-10 6-16 6-16"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire</span><h2 class="pd">Bières</h2></div>
+      <div class="item-row"><span class="item-name">Pelforth Rouge <span class="item-note">pression 25cl</span></span><span class="leader"></span><span class="item-price">5,20€</span></div>
+      <div class="item-row"><span class="item-name">SuperBock <span class="item-note">25cl</span></span><span class="leader"></span><span class="item-price">3,50€</span></div>
+      <div class="item-row"><span class="item-name">Panaché / Monaco <span class="item-note">25cl</span></span><span class="leader"></span><span class="item-price">3,30€</span></div>
+      <div class="item-row"><span class="item-name">1664 Blanche <span class="item-note">33cl</span></span><span class="leader"></span><span class="item-price">4,50€</span></div>
+      <div class="item-row"><span class="item-name">Corona <span class="item-note">33cl</span></span><span class="leader"></span><span class="item-price">4,50€</span></div>
+      <div class="item-row"><span class="item-name">Heineken <span class="item-note">25cl</span></span><span class="leader"></span><span class="item-price">2,80€</span></div>
+      <div class="item-row"><span class="item-name">Affligem <span class="item-note">pression 25cl</span></span><span class="leader"></span><span class="item-price">5,20€</span></div>
+    </section>
+
+    <section class="cat-card" id="vins">
+      <svg class="card-icon light icon-vins" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M28 15c-4 14-4 24 6 30 6 4 10 10 10 18 0 10-8 14-8 14M56 15c4 14 4 24-6 30-6 4-10 10-10 18 0 10 8 14 8 14"/>
+        <path d="M28 15h28"/>
+        <path d="M36 77h16"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire & grignoter</span><h2 class="pd">Vins & Grignotage</h2></div>
+      <div class="item-row"><span class="item-name">Verre de vin / cidre</span><span class="leader"></span><span class="item-price">5,00€</span></div>
+      <div class="item-row"><span class="item-name">Pichet de vin <span class="item-note">25cl</span></span><span class="leader"></span><span class="item-price">7,00€</span></div>
+      <div class="item-row"><span class="item-name">Bouteille de vin <span class="item-note">75cl</span></span><span class="leader"></span><span class="item-price">22,00€</span></div>
+      <div class="item-row"><span class="item-name">Saucisson sec Avistou <span class="item-note">200g</span></span><span class="leader"></span><span class="item-price">6,90€</span></div>
+      <div class="item-row"><span class="item-name">Demi crottin de chèvre</span><span class="leader"></span><span class="item-price">3,50€</span></div>
+      <div class="item-row"><span class="item-name">Glace <span class="item-note">bâtonnet</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+    </section>
+
+    <section class="cat-card" id="softs">
+      <svg class="card-icon light icon-softs" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M28 30h44l-6 55c0 4-32 4-32 0L28 30z"/>
+        <path d="M60 15l4 25M60 15l-8 10"/>
+        <path d="M32 45h36M35 60h30"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire</span><h2 class="pd">Softs & Sodas</h2></div>
+      <div class="item-row"><span class="item-name">Coca Cola / Zéro <span class="item-note">33cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Red Bull <span class="item-note">20cl</span></span><span class="leader"></span><span class="item-price">4,00€</span></div>
+      <div class="item-row"><span class="item-name">Schweppes / Agrum' <span class="item-note">33cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Orangina / Fanta / Ice Tea</span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Jus de fruit Pago <span class="item-note">20cl</span></span><span class="leader"></span><span class="item-price">4,00€</span></div>
+      <div class="item-row"><span class="item-name">Perrier <span class="item-note">33cl</span></span><span class="leader"></span><span class="item-price">2,50€</span></div>
+      <div class="item-row"><span class="item-name">Diabolo</span><span class="leader"></span><span class="item-price">2,00€</span></div>
+    </section>
+
+    <section class="cat-card" id="cocktails">
+      <svg class="card-icon light icon-cocktails" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M18 20h64L50 55 18 20z"/>
+        <path d="M50 55v25M35 80h30"/>
+        <circle cx="60" cy="30" r="4" fill="currentColor" stroke="none"/>
+      </svg>
+      <div class="cat-title"><span class="eyebrow-sm">à boire</span><h2 class="pd">Cocktails</h2></div>
+      <div class="item-row"><span class="item-name">Virgin Mojito <span class="item-note">sans alcool</span></span><span class="leader"></span><span class="item-price">4,60€</span></div>
+      <div class="item-row"><span class="item-name">Mojito</span><span class="leader"></span><span class="item-price">7,00€</span></div>
+      <div class="item-row"><span class="item-name">Caïpirinha</span><span class="leader"></span><span class="item-price">7,00€</span></div>
+      <div class="item-row"><span class="item-name">Spritz</span><span class="leader"></span><span class="item-price">7,00€</span></div>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>
