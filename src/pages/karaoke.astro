@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FloatingBadge from '../components/FloatingBadge.astro';
+import SearchBox from '../components/karaoke/SearchBox.astro';
+import SongRow from '../components/karaoke/SongRow.astro';
+import songs from '../data/karaoke.json';
+
+const PAGE_SIZE = 50;
+const firstPage = songs.slice(0, PAGE_SIZE);
+---
+
+<Layout title="Karaoké — Le Pari's" theme="dark" active="karaoke">
+  <div class="page-hero">
+    <div class="eyebrow">Soirée karaoké</div>
+    <h1 class="cg">La Liste</h1>
+  </div>
+
+  <FloatingBadge label="Organiser une soirée karaoké" phone="02 38 53 29 34" variant="orange" />
+
+  <SearchBox count={songs.length} />
+
+  <div class="wrap wrap--narrow">
+    <div class="song-list" id="songList">
+      {firstPage.map((song, i) => (
+        <SongRow title={song.title} artist={song.artist} index={i} />
+      ))}
+    </div>
+    <div class="scroll-sentinel" id="scrollSentinel"></div>
+    <div class="no-results" id="noResults">Aucune chanson trouvée pour cette recherche.</div>
+  </div>
+</Layout>
+
+<style>
+  .cg { font-family: var(--font-title); font-weight: 700; }
+
+  .page-hero { text-align: center; padding: 56px 24px 12px; }
+  .page-hero .eyebrow { font-family: var(--font-hand); font-weight: 400; font-size: 1rem; color: var(--color-orange); margin-bottom: 8px; }
+  .page-hero h1 { font-size: clamp(2.6rem, 7vw, 3.6rem); color: var(--color-text-on-dark); }
+
+  .song-list { padding-bottom: 24px; }
+
+  .no-results { text-align: center; padding: 48px 24px; color: var(--color-text-secondary); font-size: 1rem; display: none; }
+  .no-results.show { display: block; }
+
+  @media (max-width: 760px) {
+    .page-hero { padding: 56px 12px 12px; }
+    .page-hero h1 { font-size: 2.1rem; }
+    .no-results { padding: 48px 12px; }
+  }
+</style>
+
+<script>
+  import allSongsRaw from '../data/karaoke.json';
+  import { iconFor, rotationFor } from '../components/karaoke/musicIcons';
+
+  const PAGE_SIZE = 50;
+  const allSongs = allSongsRaw.map((song, i) => ({ ...song, _idx: i }));
+
+  const listEl = document.getElementById('songList') as HTMLElement;
+  const sentinel = document.getElementById('scrollSentinel') as HTMLElement;
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement | null;
+  const resultCount = document.getElementById('resultCount');
+  const noResults = document.getElementById('noResults');
+
+  let filtered = allSongs;
+  // the first PAGE_SIZE rows are already server-rendered
+  let rendered = Math.min(PAGE_SIZE, allSongs.length);
+
+  function normalize(str: string) {
+    return str.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  function createRow(song: { title: string; artist: string; _idx: number }) {
+    const row = document.createElement('div');
+    row.className = 'song-row';
+    row.dataset.title = song.title;
+    row.dataset.artist = song.artist;
+
+    const info = document.createElement('div');
+    const titleEl = document.createElement('div');
+    titleEl.className = 'song-title';
+    titleEl.textContent = song.title;
+    const artistEl = document.createElement('div');
+    artistEl.className = 'song-artist';
+    artistEl.textContent = song.artist;
+    info.append(titleEl, artistEl);
+
+    const iconWrap = document.createElement('div');
+    iconWrap.className = 'song-icon';
+    iconWrap.style.transform = `rotate(${rotationFor(song._idx)}deg)`;
+    iconWrap.innerHTML = iconFor(song._idx);
+
+    row.append(info, iconWrap);
+    return row;
+  }
+
+  function renderMore() {
+    const next = filtered.slice(rendered, rendered + PAGE_SIZE);
+    next.forEach((song) => listEl.appendChild(createRow(song)));
+    rendered += next.length;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting && rendered < filtered.length) {
+        renderMore();
+      }
+    },
+    { rootMargin: '600px' }
+  );
+  observer.observe(sentinel);
+
+  searchInput?.addEventListener('input', () => {
+    const q = normalize(searchInput.value.trim());
+    filtered = q
+      ? allSongs.filter((s) => normalize(s.title).includes(q) || normalize(s.artist).includes(q))
+      : allSongs;
+
+    listEl.innerHTML = '';
+    rendered = 0;
+    renderMore();
+
+    if (resultCount) resultCount.textContent = filtered.length + (filtered.length > 1 ? ' chansons' : ' chanson');
+    noResults?.classList.toggle('show', filtered.length === 0);
+  });
+</script>

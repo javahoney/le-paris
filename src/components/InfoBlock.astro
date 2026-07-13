@@ -1,0 +1,18 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="infos__block">
+  <span class="hand-tag">{label}</span>
+  <p><slot /></p>
+</div>
+
+<style>
+  .infos__block .hand-tag { font-family: var(--font-title); font-weight: 600; font-size: 1.1rem; color: var(--color-white); }
+  .infos__block p { font-size: 1rem; line-height: 1.6; color: var(--color-text-on-dark); }
+  .infos__block p :global(a) { color: var(--color-text-on-dark); text-decoration: underline; }
+</style>

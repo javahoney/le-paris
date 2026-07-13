@@ -1,0 +1,33 @@
+---
+interface Props {
+  dark?: boolean;
+}
+
+const { dark = false } = Astro.props;
+---
+
+<div class:list={['infos', { 'infos--dark': dark }]}>
+  <div class="infos__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .infos { background: var(--color-bordeaux); color: var(--color-creme); }
+  .infos--dark { background: var(--color-dark-nav); }
+  .infos__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 56px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  :global(.infos--dark .infos__block .hand-tag) { color: var(--color-orange); }
+
+  @media (max-width: 700px) {
+    .infos__inner { grid-template-columns: 1fr; padding: 56px 12px; }
+  }
+</style>

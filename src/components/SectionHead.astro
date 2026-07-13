@@ -1,0 +1,17 @@
+---
+import HandTag from './HandTag.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<div class="section-head">
+  <HandTag>{eyebrow}</HandTag>
+  <h2 class="pd">{title}</h2>
+  {description && <p>{description}</p>}
+</div>

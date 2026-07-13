@@ -1,0 +1,21 @@
+---
+import { iconFor, rotationFor } from './musicIcons';
+
+interface Props {
+  title: string;
+  artist: string;
+  index: number;
+}
+
+const { title, artist, index } = Astro.props;
+const icon = iconFor(index);
+const rotation = rotationFor(index);
+---
+
+<div class="song-row" data-title={title} data-artist={artist}>
+  <div>
+    <div class="song-title">{title}</div>
+    <div class="song-artist">{artist}</div>
+  </div>
+  <div class="song-icon" style={`transform: rotate(${rotation}deg)`} set:html={icon} />
+</div>

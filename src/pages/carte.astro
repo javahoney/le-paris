@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HandTag from '../components/HandTag.astro';
+import Chip from '../components/Chip.astro';
+import MenuCategoryCard from '../components/menu/MenuCategoryCard.astro';
+import FloatingBadge from '../components/FloatingBadge.astro';
+import menu from '../data/menu.json';
+---
+
+<Layout title="La Carte — Le Pari's" active="carte">
+  <FloatingBadge label="Réserver une table" phone="02 38 53 29 34" variant="green" />
+
+  <div class="page-hero">
+    <HandTag rotate={-3}>fait avec amour</HandTag>
+    <h1 class="pd">La Carte</h1>
+    <svg class="brush" viewBox="0 0 160 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 12 Q 30 2, 55 11 T 110 10 T 156 8" stroke="#E8821E" stroke-width="4" fill="none" stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <nav class="cat-nav">
+    {menu.categories.map((cat) => (
+      <Chip href={`#${cat.slug}`}>{cat.title}</Chip>
+    ))}
+  </nav>
+
+  <div class="wrap">
+    <MenuCategoryCard
+      id="plats"
+      eyebrow={menu.plats.eyebrow}
+      title={menu.plats.title}
+      icon="plats"
+      items={menu.plats.items}
+      featured
+    />
+
+    <div class="categories">
+      {menu.categories.map((cat) => (
+        <MenuCategoryCard
+          id={cat.slug}
+          eyebrow={cat.eyebrow}
+          title={cat.title}
+          icon={cat.icon as any}
+          items={cat.items}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-hero { text-align: center; padding: 56px 24px 8px; position: relative; }
+  .page-hero h1 { font-size: clamp(3.2rem, 8vw, 4.4rem); color: var(--color-bordeaux); font-weight: 700; }
+  .brush { display: block; margin: 10px auto 0; width: 160px; height: 20px; }
+
+  .cat-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 24px 24px 48px; }
+
+  .categories { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 64px; }
+
+  @media (max-width: 760px) {
+    .categories { grid-template-columns: 1fr; }
+    .page-hero { padding: 56px 12px 8px; }
+    .page-hero h1 { font-size: 2.3rem; }
+    .cat-nav { padding: 24px 12px 48px; }
+  }
+</style>

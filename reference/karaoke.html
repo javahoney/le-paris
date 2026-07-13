@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karaoké — Le Pari's</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Permanent+Marker&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Work Sans',sans-serif; background:#2E1710; color:#F3E4D2; }
+  .cg { font-family:'Cormorant Garamond',serif; font-weight:700; }
+  .hand { font-family:'Permanent Marker',cursive; }
+
+  .wrap { max-width:900px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  .nav { background:#241209; border-bottom:1px solid #E8821E44; }
+  .nav__inner { max-width:900px; margin:0 auto; padding:20px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .nav__logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.5rem; color:#E8821E; }
+  .nav__links { display:flex; gap:8px; }
+  .navlink { font-weight:600; font-size:0.85rem; text-decoration:none; color:#F3E4D2; background:#3A2015; border:1.5px solid #E8821E44; padding:8px 18px; border-radius:0; transition:.2s; }
+  .navlink.active, .navlink:hover { background:#E8821E; color:#241209; border-color:#E8821E; }
+
+  /* HERO */
+  .page-hero { text-align:center; padding:56px 24px 12px; }
+  .page-hero .eyebrow { font-family:'Permanent Marker',cursive; font-weight:400; font-size:1rem; color:#E8821E; margin-bottom:8px; }
+  .page-hero h1 { font-size:clamp(2.6rem,7vw,3.6rem); color:#F3E4D2; }
+
+  .booking-tag { position:fixed; right:24px; top:50%; transform:translateY(-50%) rotate(-4deg); padding:14px 20px; background:#E8821E; color:#241209; font-weight:600; font-size:0.85rem; line-height:1.4; z-index:50; box-shadow:0 4px 14px rgba(0,0,0,0.35); max-width:150px; text-align:center; }
+  .booking-tag strong { display:block; font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; margin-bottom:4px; }
+
+  @media (max-width:760px){
+    .booking-tag { right:12px; max-width:110px; font-size:0.72rem; padding:10px 12px; }
+    .booking-tag strong { font-size:0.85rem; }
+  }
+
+  /* SEARCH */
+  .search-wrap { padding:24px 24px 40px; }
+  .search-box { position:relative; max-width:600px; margin:0 auto; }
+  .search-box input { width:100%; padding:16px 20px 16px 48px; border-radius:30px; border:2px solid #5C3A21; background:#3A2015; color:#F3E4D2; font-size:1.05rem; font-family:'Work Sans',sans-serif; outline:none; transition:.2s; }
+  .search-box input:focus { border-color:#E8821E; }
+  .search-box input::placeholder { color:#8a6a5a; }
+  .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); width:20px; height:20px; opacity:0.6; }
+  .result-count { text-align:center; font-size:0.85rem; color:#8a6a5a; margin-top:12px; }
+
+  /* LIST */
+  .song-list { padding-bottom:64px; }
+  .song-row { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; margin-bottom:10px; background:#3A2015; border-radius:0; transition:.15s; }
+  .song-row:hover { background:#4a2a1a; }
+  .song-row.hidden { display:none; }
+  .song-title { font-weight:600; font-size:1rem; color:#F3E4D2; }
+  .song-artist { font-size:0.85rem; color:#c9a888; margin-top:2px; }
+  .song-icon { width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; opacity:0.35; }
+  .song-icon svg { width:22px; height:22px; }
+
+  .no-results { text-align:center; padding:48px 24px; color:#8a6a5a; font-size:1rem; display:none; }
+  .no-results.show { display:block; }
+
+  @media (max-width:640px){
+    .nav__links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav__inner">
+    <div class="nav__logo">Le Pari's</div>
+    <div class="nav__links">
+      <a class="navlink" href="#">Accueil</a>
+      <a class="navlink" href="#">Carte</a>
+      <a class="navlink active" href="#">Karaoké</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="eyebrow">Soirée karaoké</div>
+  <h1 class="cg">La Liste</h1>
+</div>
+
+<div class="booking-tag">
+  <strong>Organiser une soirée karaoké</strong>
+  02 38 53 29 34
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#F3E4D2" stroke-width="2">
+      <circle cx="10" cy="10" r="7"/>
+      <line x1="21" y1="21" x2="15" y2="15"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Rechercher un titre ou un artiste...">
+  </div>
+  <div class="result-count" id="resultCount">42 chansons</div>
+</div>
+
+<div class="wrap">
+  <div class="song-list" id="songList">
+    <div class="song-row" data-title="Ne me quitte pas" data-artist="Jacques Brel"><div><div class="song-title">Ne me quitte pas</div><div class="song-artist">Jacques Brel</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="I Will Survive" data-artist="Gloria Gaynor"><div><div class="song-title">I Will Survive</div><div class="song-artist">Gloria Gaynor</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="La Bohème" data-artist="Charles Aznavour"><div><div class="song-title">La Bohème</div><div class="song-artist">Charles Aznavour</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Sweet Caroline" data-artist="Neil Diamond"><div><div class="song-title">Sweet Caroline</div><div class="song-artist">Neil Diamond</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Alexandrie Alexandra" data-artist="Claude François"><div><div class="song-title">Alexandrie Alexandra</div><div class="song-artist">Claude François</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Don't Stop Believin'" data-artist="Journey"><div><div class="song-title">Don't Stop Believin'</div><div class="song-artist">Journey</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Il Jouait du Piano Debout" data-artist="France Gall"><div><div class="song-title">Il Jouait du Piano Debout</div><div class="song-artist">France Gall</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Bohemian Rhapsody" data-artist="Queen"><div><div class="song-title">Bohemian Rhapsody</div><div class="song-artist">Queen</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Formidable" data-artist="Stromae"><div><div class="song-title">Formidable</div><div class="song-artist">Stromae</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Livin' on a Prayer" data-artist="Bon Jovi"><div><div class="song-title">Livin' on a Prayer</div><div class="song-artist">Bon Jovi</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Aline" data-artist="Christophe"><div><div class="song-title">Aline</div><div class="song-artist">Christophe</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Dancing Queen" data-artist="ABBA"><div><div class="song-title">Dancing Queen</div><div class="song-artist">ABBA</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Ma Liberté" data-artist="Georges Moustaki"><div><div class="song-title">Ma Liberté</div><div class="song-artist">Georges Moustaki</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Wonderwall" data-artist="Oasis"><div><div class="song-title">Wonderwall</div><div class="song-artist">Oasis</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Sous le Vent" data-artist="Garou &amp; Céline Dion"><div><div class="song-title">Sous le Vent</div><div class="song-artist">Garou & Céline Dion</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Hotel California" data-artist="Eagles"><div><div class="song-title">Hotel California</div><div class="song-artist">Eagles</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Je Te Promets" data-artist="Johnny Hallyday"><div><div class="song-title">Je Te Promets</div><div class="song-artist">Johnny Hallyday</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Shallow" data-artist="Lady Gaga &amp; Bradley Cooper"><div><div class="song-title">Shallow</div><div class="song-artist">Lady Gaga & Bradley Cooper</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Comme d'Habitude" data-artist="Claude François"><div><div class="song-title">Comme d'Habitude</div><div class="song-artist">Claude François</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Africa" data-artist="Toto"><div><div class="song-title">Africa</div><div class="song-artist">Toto</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Voyage Voyage" data-artist="Desireless"><div><div class="song-title">Voyage Voyage</div><div class="song-artist">Desireless</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Someone Like You" data-artist="Adele"><div><div class="song-title">Someone Like You</div><div class="song-artist">Adele</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="La Vie en Rose" data-artist="Édith Piaf"><div><div class="song-title">La Vie en Rose</div><div class="song-artist">Édith Piaf</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Mr. Brightside" data-artist="The Killers"><div><div class="song-title">Mr. Brightside</div><div class="song-artist">The Killers</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="On Va S'Aimer" data-artist="Gilbert Montagné"><div><div class="song-title">On Va S'Aimer</div><div class="song-artist">Gilbert Montagné</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Billie Jean" data-artist="Michael Jackson"><div><div class="song-title">Billie Jean</div><div class="song-artist">Michael Jackson</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Emmenez-moi" data-artist="Charles Aznavour"><div><div class="song-title">Emmenez-moi</div><div class="song-artist">Charles Aznavour</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Uptown Funk" data-artist="Mark Ronson ft. Bruno Mars"><div><div class="song-title">Uptown Funk</div><div class="song-artist">Mark Ronson ft. Bruno Mars</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Les Champs-Élysées" data-artist="Joe Dassin"><div><div class="song-title">Les Champs-Élysées</div><div class="song-artist">Joe Dassin</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Rolling in the Deep" data-artist="Adele"><div><div class="song-title">Rolling in the Deep</div><div class="song-artist">Adele</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Il Est 5 Heures, Paris S'Éveille" data-artist="Jacques Dutronc"><div><div class="song-title">Il Est 5 Heures, Paris S'Éveille</div><div class="song-artist">Jacques Dutronc</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Take On Me" data-artist="a-ha"><div><div class="song-title">Take On Me</div><div class="song-artist">a-ha</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Papaoutai" data-artist="Stromae"><div><div class="song-title">Papaoutai</div><div class="song-artist">Stromae</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Zombie" data-artist="The Cranberries"><div><div class="song-title">Zombie</div><div class="song-artist">The Cranberries</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Aïcha" data-artist="Khaled"><div><div class="song-title">Aïcha</div><div class="song-artist">Khaled</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Torn" data-artist="Natalie Imbruglia"><div><div class="song-title">Torn</div><div class="song-artist">Natalie Imbruglia</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Foule Sentimentale" data-artist="Alain Souchon"><div><div class="song-title">Foule Sentimentale</div><div class="song-artist">Alain Souchon</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Can't Stop the Feeling!" data-artist="Justin Timberlake"><div><div class="song-title">Can't Stop the Feeling!</div><div class="song-artist">Justin Timberlake</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Tous les Mêmes" data-artist="Stromae"><div><div class="song-title">Tous les Mêmes</div><div class="song-artist">Stromae</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Don't Stop Me Now" data-artist="Queen"><div><div class="song-title">Don't Stop Me Now</div><div class="song-artist">Queen</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Je Veux" data-artist="Zaz"><div><div class="song-title">Je Veux</div><div class="song-artist">Zaz</div></div><div class="song-icon"></div></div>
+    <div class="song-row" data-title="Sweet Home Alabama" data-artist="Lynyrd Skynyrd"><div><div class="song-title">Sweet Home Alabama</div><div class="song-artist">Lynyrd Skynyrd</div></div><div class="song-icon"></div></div>
+  </div>
+  <div class="no-results" id="noResults">Aucune chanson trouvée pour cette recherche.</div>
+</div>
+
+<script>
+  const musicIcons = [
+    // boombox / poste radio vintage
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E8821E" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="11" rx="1"/><circle cx="8" cy="14" r="2.3"/><circle cx="16" cy="14" r="2.3"/><path d="M7 8V5h10v3"/></svg>',
+    // boule à facettes (disco)
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E8821E" stroke-width="2"><line x1="12" y1="2" x2="12" y2="5"/><circle cx="12" cy="13" r="8"/><path d="M4 13h16M12 5v16M6.3 7.3l11.4 11.4M17.7 7.3L6.3 18.7"/></svg>',
+    // saxophone stylisé
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E8821E" stroke-width="2" stroke-linecap="round"><path d="M9 3l3 3v9a4 4 0 004 4 3 3 0 003-3c0-2-2-3-4-3"/><circle cx="9" cy="19" r="2"/><line x1="9" y1="6" x2="9" y2="17"/></svg>',
+    // tambourin
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E8821E" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="4" r="0.8" fill="#E8821E"/><circle cx="20" cy="12" r="0.8" fill="#E8821E"/><circle cx="12" cy="20" r="0.8" fill="#E8821E"/><circle cx="4" cy="12" r="0.8" fill="#E8821E"/></svg>',
+    // double croche
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E8821E" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M9 18V6l11-3v11M9 10l11-3"/></svg>'
+  ];
+
+  document.querySelectorAll('.song-icon').forEach((el, i) => {
+    el.innerHTML = musicIcons[i % musicIcons.length];
+    const angle = ((i * 37) % 25) - 12; // rotation pseudo-aléatoire stable, entre -12° et 12°
+    el.style.transform = `rotate(${angle}deg)`;
+  });
+
+  const searchInput = document.getElementById('searchInput');
+  const rows = Array.from(document.querySelectorAll('.song-row'));
+  const resultCount = document.getElementById('resultCount');
+  const noResults = document.getElementById('noResults');
+
+  function normalize(str) {
+    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const q = normalize(searchInput.value.trim());
+    let visible = 0;
+    rows.forEach(row => {
+      const title = normalize(row.dataset.title);
+      const artist = normalize(row.dataset.artist);
+      const match = title.includes(q) || artist.includes(q);
+      row.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    resultCount.textContent = visible + (visible > 1 ? ' chansons' : ' chanson');
+    noResults.classList.toggle('show', visible === 0);
+  });
+</script>
+
+</body>
+</html>

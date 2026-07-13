@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="presta-card">
+  <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <slot name="icon" />
+  </svg>
+  <div class="presta-card__inner">
+    <h3>{title}</h3>
+    <p><slot /></p>
+  </div>
+</div>
+
+<style>
+  .presta-card {
+    background: linear-gradient(160deg, #ffffff 0%, #fdf8f1 100%);
+    padding: 32px 26px;
+    box-shadow: 0 2px 14px rgba(122, 23, 53, 0.08), inset 0 0 0 1px rgba(122, 23, 53, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .card-icon { position: absolute; z-index: 0; pointer-events: none; transform: rotate(-14deg); top: -30px; right: -30px; width: 150px; height: 150px; color: var(--color-bordeaux); opacity: 0.07; }
+  .presta-card__inner { position: relative; z-index: 1; }
+  .presta-card h3 { font-family: var(--font-title); font-weight: 700; font-size: 1.4rem; color: var(--color-bordeaux); margin-bottom: 10px; }
+  .presta-card p { font-size: 0.9rem; color: var(--color-bordeaux-dark); line-height: 1.5; }
+
+  @media (max-width: 760px) {
+    .presta-card { padding: 20px 16px; }
+    .presta-card h3 { font-size: 1.2rem; }
+  }
+</style>

@@ -1,0 +1,100 @@
+{
+  "plats": {
+    "eyebrow": "à manger",
+    "title": "Les Plats",
+    "items": [
+      { "name": "Plat du jour", "price": "11,90€", "featured": true },
+      { "name": "Steak haché", "price": "11,90€" },
+      { "name": "Fish and chips", "price": "14,90€" },
+      { "name": "Pièce du boucher", "price": "14,90€" }
+    ]
+  },
+  "categories": [
+    {
+      "slug": "chaudes",
+      "eyebrow": "à boire",
+      "title": "Boissons chaudes",
+      "icon": "chaudes",
+      "items": [
+        { "name": "Café", "price": "1,70€" },
+        { "name": "Allongé", "price": "2€" },
+        { "name": "Grand café", "price": "3€" },
+        { "name": "Cappuccino", "price": "3,20€" },
+        { "name": "Chocolat", "price": "2,80€" },
+        { "name": "Thé", "price": "2,50€" },
+        { "name": "Lait", "note": "20cl", "price": "1€" }
+      ]
+    },
+    {
+      "slug": "aperitifs",
+      "eyebrow": "à boire",
+      "title": "Apéritifs",
+      "icon": "aperitifs",
+      "items": [
+        { "name": "Kir pétillant", "price": "4,50€" },
+        { "name": "Kir", "price": "2,50€" },
+        { "name": "Whisky Clan Campbell", "price": "5€" },
+        { "name": "Vodka", "price": "5€" },
+        { "name": "Ricard", "price": "2,50€" },
+        { "name": "Baby", "price": "2,50€" },
+        { "name": "Get 27 / Get 31", "price": "4€" }
+      ]
+    },
+    {
+      "slug": "bieres",
+      "eyebrow": "à boire",
+      "title": "Bières",
+      "icon": "bieres",
+      "items": [
+        { "name": "Pelforth Rouge", "note": "pression", "price": "5,20€" },
+        { "name": "SuperBock", "price": "3,50€" },
+        { "name": "Panaché / Monaco", "price": "3,30€" },
+        { "name": "1664 Blanche", "price": "4,50€" },
+        { "name": "Corona", "price": "4,50€" },
+        { "name": "Heineken", "price": "2,80€" },
+        { "name": "Affligem", "note": "pression", "price": "5,20€" }
+      ]
+    },
+    {
+      "slug": "vins",
+      "eyebrow": "à boire",
+      "title": "Vins & Grignotage",
+      "icon": "vins",
+      "items": [
+        { "name": "Verre vin / cidre", "price": "5€" },
+        { "name": "Pichet", "note": "25cl", "price": "7€" },
+        { "name": "Bouteille", "price": "22€" },
+        { "name": "Saucisson", "price": "6,90€" },
+        { "name": "Crottin de chèvre", "price": "3,50€" },
+        { "name": "Glace", "price": "2,50€" }
+      ]
+    },
+    {
+      "slug": "softs",
+      "eyebrow": "à boire",
+      "title": "Softs & Sodas",
+      "icon": "softs",
+      "items": [
+        { "name": "Coca", "price": "2,50€" },
+        { "name": "Red Bull", "price": "4€" },
+        { "name": "Schweppes", "price": "2,50€" },
+        { "name": "Orangina / Fanta / IceTea", "price": "2,50€" },
+        { "name": "Pago", "price": "4€" },
+        { "name": "Perrier", "price": "2,50€" },
+        { "name": "Diabolo", "price": "2€" }
+      ]
+    },
+    {
+      "slug": "cocktails",
+      "eyebrow": "à boire",
+      "title": "Cocktails",
+      "icon": "cocktails",
+      "items": [
+        { "name": "Virgin Mojito", "price": "4,60€" },
+        { "name": "Mojito", "price": "7€" },
+        { "name": "Caïpirinha", "price": "7€" },
+        { "name": "Spritz", "price": "7€" }
+      ]
+    }
+  ]
+}

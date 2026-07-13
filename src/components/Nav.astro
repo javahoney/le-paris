@@ -1,0 +1,160 @@
+---
+interface Props {
+  theme: 'light' | 'dark';
+  active: 'accueil' | 'carte' | 'karaoke' | 'traiteur';
+}
+
+const { theme, active } = Astro.props;
+
+const links = [
+  { key: 'accueil', label: 'Accueil', href: '/' },
+  { key: 'carte', label: 'Carte', href: '/carte' },
+  { key: 'traiteur', label: 'Traiteur', href: '/traiteur' },
+  { key: 'karaoke', label: 'Karaoké', href: '/karaoke' },
+];
+---
+
+<div class:list={['nav', { 'nav--dark': theme === 'dark' }]}>
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <img src="/logo.svg" alt="Le Pari's" />
+      <span class="pd">Le Pari's</span>
+    </a>
+    <div class="nav__links">
+      {links.map((link) => (
+        <a
+          class:list={['navlink', { active: link.key === active }]}
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav__mobile-panel" id="navMobilePanel">
+    {links.map((link) => (
+      <a
+        class:list={['navlink', { active: link.key === active }]}
+        href={link.href}
+      >
+        {link.label}
+      </a>
+    ))}
+    <a class="navlink navlink--call" href="tel:0238532934">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5c0-1 1-2 2-2h2l2 5-2 1a11 11 0 006 6l1-2 5 2v2c0 1-1 2-2 2A15 15 0 014 5z" />
+      </svg>
+      02 38 53 29 34
+    </a>
+  </div>
+</div>
+
+<style>
+  .nav { background: var(--color-creme); border-bottom: 2px solid #E8821E22; }
+  .nav__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav__logo img { height: 40px; width: 40px; }
+  .nav__logo span { font-weight: 700; font-size: 1.7rem; color: var(--color-bordeaux); }
+  .nav__links { display: flex; gap: 8px; }
+  .navlink {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--color-bordeaux);
+    background: #fff;
+    padding: 8px 18px;
+    border-radius: var(--radius-none);
+    border: 1.5px solid #7A173522;
+    transition: 0.2s;
+  }
+  .navlink.active,
+  .navlink:hover { background: var(--color-bordeaux); color: var(--color-creme); border-color: var(--color-bordeaux); }
+
+  .nav__burger {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .nav__burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--color-bordeaux);
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav__burger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .nav__burger.open span:nth-child(2) { opacity: 0; }
+  .nav__burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+  .nav__mobile-panel {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px 12px 20px;
+  }
+  .nav__mobile-panel.open { display: flex; }
+  .nav__mobile-panel .navlink { text-align: center; }
+  .navlink--call {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-green);
+    color: var(--color-creme);
+    border-color: var(--color-green);
+  }
+  .navlink--call svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .navlink--call:hover { background: var(--color-orange); color: var(--color-dark-nav); border-color: var(--color-orange); }
+
+  /* DARK THEME (Karaoké) */
+  .nav--dark { background: var(--color-dark-nav); border-bottom: 1px solid #E8821E44; }
+  .nav--dark .nav__logo span { color: var(--color-orange); font-size: 1.5rem; }
+  .nav--dark .navlink {
+    color: var(--color-text-on-dark);
+    background: var(--color-dark-card);
+    border: 1.5px solid #E8821E44;
+  }
+  .nav--dark .navlink.active,
+  .nav--dark .navlink:hover { background: var(--color-orange); color: var(--color-dark-nav); border-color: var(--color-orange); }
+  .nav--dark .nav__burger span { background: var(--color-orange); }
+  .nav--dark .navlink--call { color: var(--color-creme); border-color: var(--color-green); }
+
+  @media (max-width: 760px) {
+    .nav__inner { padding: 16px 12px; }
+    .nav__links { display: none; }
+    .nav__burger { display: flex; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.nav__burger').forEach((burger) => {
+    const panel = burger.parentElement?.parentElement?.querySelector<HTMLElement>('.nav__mobile-panel');
+    burger.addEventListener('click', () => {
+      const isOpen = panel?.classList.toggle('open');
+      burger.classList.toggle('open', !!isOpen);
+      burger.setAttribute('aria-expanded', String(!!isOpen));
+      burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+  });
+</script>

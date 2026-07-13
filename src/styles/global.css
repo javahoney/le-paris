@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Permanent+Marker&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --color-bordeaux: #7A1735;
+  --color-bordeaux-dark: #5C3A21;
+  --color-orange: #E8821E;
+  --color-creme: #FBF3E7;
+  --color-text: #3A1F1F;
+  --color-text-secondary: #8a6a5a;
+  --color-text-on-dark: #F3E4D2;
+  --color-white: #FFFFFF;
+
+  --color-dark-bg: #2E1710;
+  --color-dark-nav: #241209;
+  --color-dark-card: #3A2015;
+  --color-dark-card-hover: #4a2a1a;
+  --color-dark-text-secondary: #c9a888;
+
+  --color-green: #3F6B4A;
+
+  --font-title: 'Cormorant Garamond', serif;
+  --font-hand: 'Permanent Marker', cursive;
+  --font-body: 'Work Sans', sans-serif;
+
+  --radius-none: 0;
+  --radius-pill: 30px;
+  --radius-circle: 50%;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-creme);
+  color: var(--color-text);
+}
+
+body.theme-dark {
+  background: var(--color-dark-bg);
+  color: var(--color-text-on-dark);
+}
+
+.pd { font-family: var(--font-title); }
+.hand { font-family: var(--font-hand); }
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+.wrap--narrow { max-width: 900px; }
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 14px 30px;
+  border-radius: var(--radius-none);
+  transition: 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn--primary { background: var(--color-bordeaux); color: var(--color-creme); }
+.btn--primary:hover { background: var(--color-orange); }
+.btn--secondary { background: transparent; color: var(--color-bordeaux); border: 1.5px solid var(--color-bordeaux); }
+.btn--secondary:hover { background: var(--color-bordeaux); color: var(--color-creme); }
+.btn--secondary.btn--on-dark { border-color: var(--color-creme); color: var(--color-creme); }
+.btn--secondary.btn--on-dark:hover { background: var(--color-creme); color: var(--color-bordeaux); }
+
+/* HAND TAG (eyebrow manuscrit) */
+.hand-tag {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--color-orange);
+  display: block;
+}
+
+/* SECTION HEAD */
+.section { padding: 56px 24px; }
+.section-head { text-align: center; margin-bottom: 40px; }
+.section-head .hand-tag { font-size: 0.95rem; margin-bottom: 8px; }
+.section-head h2 { font-size: 2rem; color: var(--color-bordeaux); font-weight: 700; }
+.section-head p { font-size: 0.95rem; color: var(--color-bordeaux-dark); max-width: 520px; margin: 12px auto 0; }
+
+/* MENU ITEM ROW */
+.item-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 19px; }
+.item-row:last-child { margin-bottom: 0; }
+.item-name { font-weight: 400; font-size: 0.94rem; color: var(--color-text); white-space: nowrap; }
+.item-note { font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; margin-left: 2px; }
+.leader { flex: 1; border-bottom: 1.5px dotted #5C3A2144; margin-bottom: 4px; min-width: 14px; }
+.item-price { font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; color: #6b625c; white-space: nowrap; }
+
+/* CHIP */
+.chip {
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: #fff;
+  color: var(--color-bordeaux-dark);
+  padding: 9px 18px;
+  border-radius: var(--radius-none);
+  border: 1.5px solid #5C3A2122;
+  text-decoration: none;
+  transition: 0.2s;
+  display: inline-block;
+}
+a.chip:hover { background: var(--color-orange); color: #fff; border-color: var(--color-orange); }
+
+/* KARAOKE SONG ROW (also created dynamically by client-side pagination script) */
+.song-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; margin-bottom: 10px; background: var(--color-dark-card); border-radius: var(--radius-none); transition: 0.15s; }
+.song-row:hover { background: var(--color-dark-card-hover); }
+.song-title { font-weight: 600; font-size: 1rem; color: var(--color-text-on-dark); }
+.song-artist { font-size: 0.85rem; color: var(--color-dark-text-secondary); margin-top: 2px; }
+.song-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; opacity: 0.35; }
+.song-icon svg { width: 22px; height: 22px; }
+.scroll-sentinel { height: 1px; }
+
+@media (max-width: 760px) {
+  .wrap { padding: 0 12px; }
+  .section { padding: 56px 12px; }
+  .section-head h2 { font-size: 1.6rem; }
+
+  /* let long item names wrap instead of pushing the price off the card */
+  .item-name { white-space: normal; }
+}

@@ -1,0 +1,71 @@
+---
+import CategoryIcon from './CategoryIcon.astro';
+import MenuItemRow from './MenuItemRow.astro';
+
+interface MenuItem {
+  name: string;
+  note?: string;
+  price: string;
+  featured?: boolean;
+}
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  icon: 'plats' | 'chaudes' | 'aperitifs' | 'bieres' | 'vins' | 'softs' | 'cocktails';
+  items: MenuItem[];
+  featured?: boolean;
+}
+
+const { id, eyebrow, title, icon, items, featured = false } = Astro.props;
+---
+
+<section id={id} class:list={['menu-card', { 'menu-card--featured': featured }]}>
+  <CategoryIcon name={icon} variant={featured ? 'dark' : 'light'} />
+  <div class="menu-card__content">
+    <span class="hand-tag">{eyebrow}</span>
+    <h2 class="pd">{title}</h2>
+    {items.map((item) => (
+      <MenuItemRow name={item.name} note={item.note} price={item.price} featured={item.featured} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .menu-card {
+    border-radius: var(--radius-none);
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-card__content { position: relative; z-index: 1; }
+  .menu-card .hand-tag { font-size: 0.85rem; margin-bottom: 10px; }
+  .menu-card h2 { font-size: 1.65rem; color: var(--color-bordeaux); font-weight: 700; margin-bottom: 18px; }
+
+  /* Standard drink category card */
+  .menu-card:not(.menu-card--featured) {
+    background: linear-gradient(160deg, #ffffff 0%, #fdf8f1 100%);
+    padding: 28px 30px;
+    box-shadow: 0 2px 14px rgba(122, 23, 53, 0.08), inset 0 0 0 1px rgba(122, 23, 53, 0.04);
+    scroll-margin-top: 24px;
+  }
+
+  /* Featured "Plats" card */
+  .menu-card--featured {
+    background: radial-gradient(circle at 15% 15%, #8a1e3f 0%, #7A1735 45%, #6b1430 100%);
+    padding: 36px 40px;
+    margin-bottom: 56px;
+    box-shadow: 0 8px 28px rgba(122, 23, 53, 0.25);
+  }
+  .menu-card--featured h2 { color: var(--color-creme); }
+  .menu-card--featured :global(.item-name) { color: var(--color-creme); }
+  .menu-card--featured :global(.leader) { border-bottom-color: #FBF3E766; }
+  .menu-card--featured :global(.item-note) { color: #F3E4D299; }
+  .menu-card--featured :global(.item-price) { color: var(--color-white); font-weight: 700; }
+
+  @media (max-width: 760px) {
+    .menu-card h2 { font-size: 1.4rem; }
+    .menu-card:not(.menu-card--featured) { padding: 20px 16px; }
+    .menu-card--featured { padding: 20px 16px; }
+  }
+</style>

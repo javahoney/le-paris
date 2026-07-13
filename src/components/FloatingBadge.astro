@@ -1,0 +1,62 @@
+---
+interface Props {
+  label: string;
+  phone: string;
+  variant?: 'orange' | 'green';
+}
+
+const { label, phone, variant = 'orange' } = Astro.props;
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+---
+
+<a href={telHref} class:list={['booking-tag', `booking-tag--${variant}`]}>
+  <strong>{label}</strong>
+  <span class="booking-tag__phone">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 5c0-1 1-2 2-2h2l2 5-2 1a11 11 0 006 6l1-2 5 2v2c0 1-1 2-2 2A15 15 0 014 5z" />
+    </svg>
+    {phone}
+  </span>
+</a>
+
+<style>
+  .booking-tag {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-4deg);
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    z-index: 50;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    max-width: 170px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: 0.2s;
+  }
+  .booking-tag strong { display: block; font-family: var(--font-title); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .booking-tag__phone { display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap; }
+  .booking-tag__phone svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  .booking-tag--orange { background: var(--color-orange); color: var(--color-dark-nav); }
+  .booking-tag--orange:hover { background: var(--color-bordeaux); color: var(--color-creme); }
+  .booking-tag--green { background: var(--color-green); color: var(--color-creme); }
+  .booking-tag--green:hover { background: var(--color-orange); color: var(--color-dark-nav); }
+
+  @media (max-width: 760px) {
+    .booking-tag {
+      right: 12px;
+      left: auto;
+      top: auto;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      transform: rotate(-4deg);
+      max-width: 130px;
+      font-size: 0.72rem;
+      padding: 10px 12px;
+    }
+    .booking-tag strong { font-size: 0.85rem; }
+  }
+</style>

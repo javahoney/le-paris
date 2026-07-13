@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HandTag from '../components/HandTag.astro';
+import Button from '../components/Button.astro';
+import Gallery from '../components/Gallery.astro';
+import FloatingBadge from '../components/FloatingBadge.astro';
+---
+
+<Layout title="Le Pari's — Accueil" active="accueil">
+  <FloatingBadge label="Réserver une table" phone="02 38 53 29 34" variant="green" />
+
+  <div class="hero">
+    <HandTag rotate={-2}>bar · restaurant</HandTag>
+    <h1 class="pd">Le Pari's</h1>
+    <p class="hero__sub">Une ambiance familiale. Une table généreuse et un bar convivial.<span class="hero__phone">02 38 53 29 34</span></p>
+    <div class="hero__ctas">
+      <Button href="/carte" variant="primary">Voir la carte</Button>
+      <Button href="/karaoke" variant="secondary">Soirée karaoké</Button>
+    </div>
+  </div>
+
+  <Gallery eyebrow="un aperçu" title="Chez nous" ctaLabel="Voir la carte" ctaHref="/carte" />
+</Layout>
+
+<style>
+  .hero { text-align: center; padding: 70px 24px 56px; position: relative; overflow: hidden; }
+  .hero h1 { font-size: clamp(3.2rem, 9vw, 5rem); color: var(--color-bordeaux); font-weight: 700; line-height: 1; }
+  .hero__sub { font-size: 1.05rem; color: var(--color-bordeaux-dark); margin-top: 16px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .hero__phone { display: block; margin-top: 10px; }
+  .hero__ctas { display: flex; justify-content: center; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .hero { padding: 70px 12px 56px; }
+    .hero h1 { font-size: 2.6rem; }
+  }
+</style>

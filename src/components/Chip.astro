@@ -1,0 +1,12 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag class="chip" href={href}>
+  <slot />
+</Tag>

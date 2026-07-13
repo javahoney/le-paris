@@ -1,0 +1,11 @@
+---
+interface Props {
+  rotate?: number;
+}
+
+const { rotate = 0 } = Astro.props;
+---
+
+<span class="hand-tag" style={rotate ? `transform: rotate(${rotate}deg)` : undefined}>
+  <slot />
+</span>

@@ -1,0 +1,43 @@
+---
+interface Props {
+  count: number;
+}
+
+const { count } = Astro.props;
+---
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#F3E4D2" stroke-width="2">
+      <circle cx="10" cy="10" r="7"></circle>
+      <line x1="21" y1="21" x2="15" y2="15"></line>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Rechercher un titre ou un artiste..." />
+  </div>
+  <div class="result-count" id="resultCount">{count} chansons</div>
+</div>
+
+<style>
+  .search-wrap { padding: 24px 24px 40px; }
+  .search-box { position: relative; max-width: 600px; margin: 0 auto; }
+  .search-box input {
+    width: 100%;
+    padding: 16px 20px 16px 48px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--color-bordeaux-dark);
+    background: var(--color-dark-card);
+    color: var(--color-text-on-dark);
+    font-size: 1.05rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: 0.2s;
+  }
+  .search-box input:focus { border-color: var(--color-orange); }
+  .search-box input::placeholder { color: var(--color-text-secondary); }
+  .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; opacity: 0.6; }
+  .result-count { text-align: center; font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 12px; }
+
+  @media (max-width: 760px) {
+    .search-wrap { padding: 24px 12px 40px; }
+  }
+</style>
