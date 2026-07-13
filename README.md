@@ -1,43 +1,56 @@
-# Astro Starter Kit: Minimal
+# Le Pari's — site web
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Site vitrine du bar-restaurant **Le Pari's** (49 Av. de Paris, 45000 Orléans), construit avec [Astro](https://astro.build).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+4 pages statiques :
 
-## 🚀 Project Structure
+- **Accueil** (`/`)
+- **Carte** (`/carte`) — plats et boissons
+- **Traiteur** (`/traiteur`)
+- **Karaoké** (`/karaoke`) — liste de chansons avec recherche et chargement progressif
 
-Inside of your Astro project, you'll see the following folders and files:
+## Structure du projet
 
 ```text
 /
-├── public/
+├── public/               fichiers statiques (favicon, logo)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/       composants Astro réutilisables
+│   │   ├── karaoke/      composants spécifiques à la page Karaoké
+│   │   ├── menu/         composants spécifiques à la Carte
+│   │   └── traiteur/     composants spécifiques au Traiteur
+│   ├── data/             contenu éditable (voir ci-dessous)
+│   ├── layouts/          Layout.astro (nav + footer communs)
+│   ├── pages/             une page par route
+│   └── styles/           global.css (variables de la charte graphique)
+└── CLAUDE.md             charte graphique (couleurs, polices, tailles, composants)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Mettre à jour le contenu
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Deux fichiers de données pilotent le contenu des pages, sans toucher au code :
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **`src/data/menu.json`** — les plats et catégories de boissons affichés sur la page Carte.
+- **`src/data/karaoke.json`** — la liste des chansons (tableau `{ "title": "...", "artist": "..." }`), affichée sur la page Karaoké.
 
-## 🧞 Commands
+Modifier ces fichiers directement (format JSON) suffit à mettre le site à jour ; aucune autre modification n'est nécessaire.
 
-All commands are run from the root of the project, from a terminal:
+## Charte graphique
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Toutes les règles de design (couleurs, polices, tailles de titres, radius, composants) sont documentées dans [`CLAUDE.md`](./CLAUDE.md). À consulter avant toute modification visuelle.
 
-## 👀 Want to learn more?
+## Commandes
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Commande | Action |
+| :--- | :--- |
+| `npm install` | Installe les dépendances |
+| `npm run dev` | Démarre le serveur de développement local |
+| `npm run build` | Build de production dans `./dist/` |
+| `npm run preview` | Prévisualise le build de production en local |
+| `npm run check` | Vérifie les types TypeScript/Astro du projet |
+
+## Stack technique
+
+- [Astro](https://docs.astro.build) (sortie statique, sans framework JS)
+- CSS pur avec variables (`src/styles/global.css`), pas de préprocesseur ni de Tailwind
+- Un peu de JavaScript client vanilla pour la recherche et le défilement infini de la page Karaoké, et le menu burger mobile
