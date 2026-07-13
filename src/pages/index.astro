@@ -4,6 +4,21 @@ import HandTag from '../components/HandTag.astro';
 import Button from '../components/Button.astro';
 import Gallery from '../components/Gallery.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
+import photo1 from '../assets/photo-gallery-1.webp';
+import photo2 from '../assets/photo-gallery-2.webp';
+import photo3 from '../assets/photo-gallery-3.webp';
+import photo4 from '../assets/photo-gallery-4.webp';
+import photo5 from '../assets/photo-gallery-5.webp';
+import photo6 from '../assets/photo-gallery-6.webp';
+
+const galleryImages = [
+  { src: photo1, alt: "Pavé de saumon grillé sur lit de spaghettis, servi au restaurant Le Pari's à Orléans" },
+  { src: photo2, alt: "Moules marinières et frites, une spécialité du Pari's à Orléans" },
+  { src: photo3, alt: "Steak tartare et frites maison dressés en salle, au restaurant Le Pari's" },
+  { src: photo4, alt: "Choucroute garnie préparée au Pari's, bar-restaurant à Orléans" },
+  { src: photo5, alt: "Brochettes grillées et sauce tzatziki, plat du restaurant Le Pari's à Orléans" },
+  { src: photo6, alt: "Salade de poulpe grillé et pommes de terre, servie au Pari's à Orléans" },
+];
 ---
 
 <Layout title="Le Pari's — Accueil" active="accueil">
@@ -19,7 +34,7 @@ import FloatingBadge from '../components/FloatingBadge.astro';
     </div>
   </div>
 
-  <Gallery eyebrow="un aperçu" title="Chez nous" ctaLabel="Voir la carte" ctaHref="/carte" />
+  <Gallery eyebrow="un aperçu" title="Chez nous" ctaLabel="Voir la carte" ctaHref="/carte" images={galleryImages} />
 </Layout>
 
 <style>

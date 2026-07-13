@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoLeParis from '../assets/logo-leparis.png';
+
 interface Props {
   theme: 'light' | 'dark';
   active: 'accueil' | 'carte' | 'karaoke' | 'traiteur';
@@ -17,7 +20,10 @@ const links = [
 <div class:list={['nav', { 'nav--dark': theme === 'dark' }]}>
   <div class="nav__inner">
     <a class="nav__logo" href="/">
-      <img src="/logo.svg" alt="Le Pari's" />
+      {theme === 'dark'
+        ? <img src="/logo.svg" alt="Le Pari's" />
+        : <Image src={logoLeParis} alt="Le Pari's" height={100} />
+      }
       <span class="pd">Le Pari's</span>
     </a>
     <div class="nav__links">
@@ -65,7 +71,7 @@ const links = [
     align-items: center;
   }
   .nav__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav__logo img { height: 40px; width: 40px; }
+  .nav__logo img { height: 40px; width: auto; }
   .nav__logo span { font-weight: 700; font-size: 1.7rem; color: var(--color-bordeaux); }
   .nav__links { display: flex; gap: 8px; }
   .navlink {
