@@ -41,7 +41,6 @@ body.theme-dark {
 }
 
 .pd { font-family: var(--font-title); }
-.hand { font-family: var(--font-hand); }
 
 .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 .wrap--narrow { max-width: 900px; }
