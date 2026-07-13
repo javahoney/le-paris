@@ -20,10 +20,7 @@ const links = [
 <div class:list={['nav', { 'nav--dark': theme === 'dark' }]}>
   <div class="nav__inner">
     <a class="nav__logo" href="/">
-      {theme === 'dark'
-        ? <img src="/logo.svg" alt="Le Pari's" />
-        : <Image src={logoLeParis} alt="Le Pari's" height={100} />
-      }
+      {theme === 'light' && <Image src={logoLeParis} alt="Le Pari's" height={100} />}
       <span class="pd">Le Pari's</span>
     </a>
     <div class="nav__links">
