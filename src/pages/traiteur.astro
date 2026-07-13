@@ -6,6 +6,7 @@ import SectionHead from '../components/SectionHead.astro';
 import Chip from '../components/Chip.astro';
 import Gallery from '../components/Gallery.astro';
 import PrestaCard from '../components/traiteur/PrestaCard.astro';
+import MenuItemRow from '../components/menu/MenuItemRow.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
 
 const formules = [
@@ -75,11 +76,7 @@ const devisMailto = "mailto:leparisbarorleans@gmail.com?subject=Demande%20de%20d
         <h2 class="pd">Nos formules traiteur</h2>
         <div class="formule-list">
           {formules.map((f) => (
-            <div class="item-row">
-              <span class="item-name">{f.name} {f.note && <span class="item-note">{f.note}</span>}</span>
-              <span class="leader"></span>
-              <span class="item-price">{f.price}</span>
-            </div>
+            <MenuItemRow name={f.name} price={f.price} />
           ))}
         </div>
         <div class="cta">
@@ -120,10 +117,10 @@ const devisMailto = "mailto:leparisbarorleans@gmail.com?subject=Demande%20de%20d
   }
   .formule-card h2 { color: var(--color-creme); font-size: 2.1rem; font-weight: 700; margin-bottom: 22px; }
   .formule-list { display: grid; grid-template-columns: 1fr; gap: 10px; }
-  .formule-list .item-name { color: var(--color-creme); }
-  .formule-list .item-note { color: #F3E4D299; }
-  .formule-list .leader { border-bottom-color: #FBF3E766; }
-  .formule-list .item-price { font-size: 1rem; color: var(--color-white); }
+  .formule-list :global(.item-name) { color: var(--color-creme); }
+  .formule-list :global(.item-note) { color: #F3E4D299; }
+  .formule-list :global(.leader) { border-bottom-color: #FBF3E766; }
+  .formule-list :global(.item-price) { font-size: 1rem; color: var(--color-white); }
   .formule-card .cta { margin-top: 28px; text-align: center; }
 
   .zone-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }

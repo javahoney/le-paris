@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HandTag from '../components/HandTag.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
 import SearchBox from '../components/karaoke/SearchBox.astro';
 import SongRow from '../components/karaoke/SongRow.astro';
@@ -11,8 +12,8 @@ const firstPage = songs.slice(0, PAGE_SIZE);
 
 <Layout title="Karaoké — Le Pari's" theme="dark" active="karaoke">
   <div class="page-hero">
-    <div class="eyebrow">Soirée karaoké</div>
-    <h1 class="cg">La Liste</h1>
+    <HandTag>Soirée karaoké</HandTag>
+    <h1 class="pd">La Liste</h1>
   </div>
 
   <FloatingBadge label="Organiser une soirée karaoké" phone="02 38 53 29 34" variant="orange" />
@@ -31,11 +32,9 @@ const firstPage = songs.slice(0, PAGE_SIZE);
 </Layout>
 
 <style>
-  .cg { font-family: var(--font-title); font-weight: 700; }
-
   .page-hero { text-align: center; padding: 56px 24px 12px; }
-  .page-hero .eyebrow { font-family: var(--font-hand); font-weight: 400; font-size: 1rem; color: var(--color-orange); margin-bottom: 8px; }
-  .page-hero h1 { font-size: clamp(2.6rem, 7vw, 3.6rem); color: var(--color-text-on-dark); }
+  .page-hero :global(.hand-tag) { font-size: 1rem; margin-bottom: 8px; }
+  .page-hero h1 { font-size: clamp(2.6rem, 7vw, 3.6rem); color: var(--color-text-on-dark); font-weight: 700; }
 
   .song-list { padding-bottom: 24px; }
 
