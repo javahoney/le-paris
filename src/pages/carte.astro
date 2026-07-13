@@ -24,9 +24,10 @@ const menu = rawMenu as MenuData;
   <div class="page-hero">
     <HandTag rotate={-3}>fait avec amour</HandTag>
     <h1 class="pd">La Carte</h1>
-    <svg class="brush" viewBox="0 0 160 20" xmlns="http://www.w3.org/2000/svg">
+    <svg class="brush" viewBox="0 0 160 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M4 12 Q 30 2, 55 11 T 110 10 T 156 8" stroke="#E8821E" stroke-width="4" fill="none" stroke-linecap="round" />
     </svg>
+    <p class="page-hero__sub">La carte du Pari's, à déguster sur place à Orléans — et disponible aussi pour vos événements avec notre <a class="text-link" href="/traiteur">service traiteur</a>.</p>
   </div>
 
   <nav class="cat-nav">
@@ -63,6 +64,7 @@ const menu = rawMenu as MenuData;
   .page-hero { text-align: center; padding: 56px 24px 8px; position: relative; }
   .page-hero h1 { font-size: clamp(3.2rem, 8vw, 4.4rem); color: var(--color-bordeaux); font-weight: 700; }
   .brush { display: block; margin: 10px auto 0; width: 160px; height: 20px; }
+  .page-hero__sub { font-size: 1.05rem; color: var(--color-bordeaux-dark); margin-top: 16px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
   .cat-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 24px 24px 48px; }
 

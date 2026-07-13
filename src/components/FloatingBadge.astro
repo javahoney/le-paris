@@ -12,7 +12,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 <a href={telHref} class:list={['booking-tag', `booking-tag--${variant}`]}>
   <strong>{label}</strong>
   <span class="booking-tag__phone">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M4 5c0-1 1-2 2-2h2l2 5-2 1a11 11 0 006 6l1-2 5 2v2c0 1-1 2-2 2A15 15 0 014 5z" />
     </svg>
     {phone}

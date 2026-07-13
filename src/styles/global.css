@@ -104,6 +104,12 @@ body.theme-dark {
 }
 a.chip:hover { background: var(--color-orange); color: #fff; border-color: var(--color-orange); }
 
+/* INLINE TEXT LINK (maillage interne en contenu) */
+.text-link { color: var(--color-bordeaux); font-weight: 600; text-decoration: underline; }
+.text-link:hover { color: var(--color-orange); }
+body.theme-dark .text-link { color: var(--color-orange); }
+body.theme-dark .text-link:hover { color: var(--color-creme); }
+
 /* KARAOKE SONG ROW (also created dynamically by client-side pagination script) */
 .song-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; margin-bottom: 10px; background: var(--color-dark-card); border-radius: var(--radius-none); transition: 0.15s; }
 .song-row:hover { background: var(--color-dark-card-hover); }
