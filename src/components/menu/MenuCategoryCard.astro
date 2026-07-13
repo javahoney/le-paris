@@ -1,19 +1,13 @@
 ---
 import CategoryIcon from './CategoryIcon.astro';
 import MenuItemRow from './MenuItemRow.astro';
-
-interface MenuItem {
-  name: string;
-  note?: string;
-  price: string;
-  featured?: boolean;
-}
+import type { CategoryIconName, MenuItem } from '../../data/types';
 
 interface Props {
   id: string;
   eyebrow: string;
   title: string;
-  icon: 'plats' | 'chaudes' | 'aperitifs' | 'bieres' | 'vins' | 'softs' | 'cocktails';
+  icon: CategoryIconName;
   items: MenuItem[];
   featured?: boolean;
 }
@@ -27,7 +21,7 @@ const { id, eyebrow, title, icon, items, featured = false } = Astro.props;
     <span class="hand-tag">{eyebrow}</span>
     <h2 class="pd">{title}</h2>
     {items.map((item) => (
-      <MenuItemRow name={item.name} note={item.note} price={item.price} featured={item.featured} />
+      <MenuItemRow name={item.name} note={item.note} price={item.price} isPlatDuJour={item.featured} />
     ))}
   </div>
 </section>

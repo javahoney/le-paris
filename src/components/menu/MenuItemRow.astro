@@ -3,18 +3,19 @@ interface Props {
   name: string;
   note?: string;
   price: string;
-  featured?: boolean;
+  /** Ligne mise en valeur au sein de la carte (ex. "Plat du jour") — distinct du `featured` de MenuCategoryCard. */
+  isPlatDuJour?: boolean;
 }
 
-const { name, note, price, featured = false } = Astro.props;
+const { name, note, price, isPlatDuJour = false } = Astro.props;
 ---
 
-<div class:list={['item-row', { 'featured-row': featured }]}>
+<div class:list={['item-row', { 'is-plat-du-jour': isPlatDuJour }]}>
   <span class="item-name">{name} {note && <span class="item-note">{note}</span>}</span>
   <span class="leader"></span>
   <span class="item-price">{price}</span>
 </div>
 
 <style>
-  .featured-row .item-name { text-transform: uppercase; letter-spacing: 0.03em; }
+  .is-plat-du-jour .item-name { text-transform: uppercase; letter-spacing: 0.03em; }
 </style>

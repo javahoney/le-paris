@@ -4,7 +4,10 @@ import HandTag from '../components/HandTag.astro';
 import Chip from '../components/Chip.astro';
 import MenuCategoryCard from '../components/menu/MenuCategoryCard.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
-import menu from '../data/menu.json';
+import rawMenu from '../data/menu.json';
+import type { MenuData } from '../data/types';
+
+const menu = rawMenu as MenuData;
 ---
 
 <Layout title="La Carte — Le Pari's" active="carte">
@@ -40,7 +43,7 @@ import menu from '../data/menu.json';
           id={cat.slug}
           eyebrow={cat.eyebrow}
           title={cat.title}
-          icon={cat.icon as any}
+          icon={cat.icon}
           items={cat.items}
         />
       ))}
