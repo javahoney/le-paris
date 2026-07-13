@@ -33,22 +33,26 @@ Répartition : fond clair/sombre dominant, bordeaux en structure, orange en acce
 `border-radius: 0` partout. Seules exceptions :
 - Barre de recherche : `30px` (pilule)
 - Icônes réseaux sociaux (footer) : `50%` (cercle)
+- Barres du menu burger (mobile) : `2px`
 
 ## Tailles de titres
 - H1 hero home : `clamp(3.2rem, 9vw, 5rem)`
 - H1 page interne : `clamp(3.2rem, 8vw, 4.4rem)` clair / `clamp(2.6rem, 7vw, 3.6rem)` sombre
+  (exception Traiteur, titre sur 2 lignes : `clamp(2.8rem, 7vw, 4.2rem)`)
 - H2 section : `2rem` à `2.3rem`
 - H2 catégorie : `1.65rem`
 - Logo nav : `1.5rem` à `1.7rem`
 - Tag manuscrit : `0.85rem` à `1.15rem`
 - Corps de texte : `0.9rem` à `1.05rem`
 - Prix : `1.1rem`, Cormorant Garamond bold
+  (exception formule-card Traiteur : `1rem`, pour caser "sur devis" sur une ligne)
 
 ## Composants
 
 **Boutons**
 - `.btn--primary` : fond `#7A1735`, texte `#FBF3E7`, hover fond `#E8821E`
 - `.btn--secondary` : fond transparent, bordure + texte `#7A1735`, hover fond `#7A1735` texte `#FBF3E7`
+- `.btn--secondary.btn--on-dark` (variante inversée sur fond bordeaux/sombre) : bordure + texte crème, hover fond crème texte bordeaux
 - Padding `14px 30px`, Work Sans 600, `0.9rem`
 
 **Navlinks**
@@ -72,7 +76,7 @@ Nom — ligne pointillée (`1.5px dotted #5C3A2144`, flex:1) — prix (Cormorant
 - Réseaux sociaux : cercle plein bordeaux, hover orange, icône crème
 
 ## Grilles
-- Largeur max contenu : `1000px` (Home/Carte) / `900px` (Karaoké)
+- Largeur max contenu : `1000px` (Home/Carte/Traiteur) / `900px` (Karaoké)
 - Galerie photos : `repeat(3,1fr)` → `1fr` mobile (<700px)
 - Catégories boissons : `1fr 1fr` → `1fr` mobile (<760px)
 - Infos pratiques : `1fr 1fr 1fr` → `1fr` mobile (<700px)
@@ -80,12 +84,13 @@ Nom — ligne pointillée (`1.5px dotted #5C3A2144`, flex:1) — prix (Cormorant
 
 ## Mobile (<760px)
 - Bords d'écran (`.wrap`, `.section`, hero, nav, footer, cards…) : `12px` au lieu de `24px`.
-- Nav : menu burger (3 barres) ouvrant un panneau déroulant avec les 4 liens ; les liens desktop sont masqués.
+- Nav : menu burger (3 barres, devient une croix ouverte) ouvrant un panneau déroulant avec les 4 liens + un dernier bouton d'appel vert (icône téléphone + numéro) ; les liens desktop sont masqués.
 - Footer : les 4 liens de nav restent visibles (mêmes boutons qu'en desktop), pas de masquage.
 - Titres H1/H2/H3 réduits d'un cran par rapport au desktop (ex. H1 hero home `2.6rem`, H2 section `1.6rem`, H2 catégorie `1.4rem`, H3 `1.2rem`).
 - Cartes (menu, prestations, formule) : padding réduit à `20px 16px` pour laisser de la place aux prix.
 - Liste menu : le nom passe à la ligne (`white-space: normal`) si trop long plutôt que de pousser le prix hors de la carte.
 - Badges villes (Traiteur) : taille réduite (`0.72rem`, padding `6px 12px`).
+- Deux CTA téléphone peuvent coexister sur une même page (Traiteur/Karaoké) : l'étiquette flottante (couleur variable selon la page) et le bouton d'appel du panneau burger (toujours vert, sans label spécifique à la page) — comportement assumé, pas une incohérence à corriger.
 
 ## Règle clé
 Orange (`#E8821E`) et Permanent Marker restent identiques sur toutes les pages, clair ou sombre — ce sont les fils conducteurs de la marque.
