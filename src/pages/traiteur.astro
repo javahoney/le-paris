@@ -8,7 +8,12 @@ import Gallery from '../components/Gallery.astro';
 import PrestaCard from '../components/traiteur/PrestaCard.astro';
 import MenuItemRow from '../components/menu/MenuItemRow.astro';
 import FloatingBadge from '../components/FloatingBadge.astro';
-import photo4 from '../assets/photo-gallery-4.webp';
+import traiteurPhoto1 from '../assets/traiteur-gallery-1.webp';
+import traiteurPhoto2 from '../assets/traiteur-gallery-2.webp';
+import traiteurPhoto3 from '../assets/traiteur-gallery-3.webp';
+import traiteurPhoto4 from '../assets/traiteur-gallery-4.webp';
+import traiteurPhoto5 from '../assets/traiteur-gallery-5.webp';
+import traiteurPhoto6 from '../assets/traiteur-gallery-6.webp';
 import { buildTraiteurServiceSchema } from '../data/schema';
 
 const formules = [
@@ -16,6 +21,15 @@ const formules = [
   { name: 'Cocktail dînatoire', price: 'sur devis' },
   { name: 'Buffet froid / chaud', price: 'sur devis' },
   { name: 'Service & dressage sur place', price: 'sur devis' },
+];
+
+const galleryImages = [
+  { src: traiteurPhoto1, alt: "Plateau repas préparé par le service traiteur du Pari's à Orléans" },
+  { src: traiteurPhoto2, alt: "Buffet dressé pour une prestation traiteur du Pari's à Orléans" },
+  { src: traiteurPhoto3, alt: "Pièces cocktail réalisées par l'équipe traiteur du Pari's à Orléans" },
+  { src: traiteurPhoto4, alt: "Dressage sur place d'une prestation traiteur du Pari's à Orléans" },
+  { src: traiteurPhoto5, alt: "Buffet froid préparé par le service traiteur du Pari's à Orléans" },
+  { src: traiteurPhoto6, alt: "Prestation traiteur réalisée par Le Pari's à Orléans" },
 ];
 
 const zones = ['Orléans', 'Saint-Jean-de-Braye', 'Olivet', 'Saran', 'Fleury-les-Aubrais', 'La Chapelle-Saint-Mesmin', 'Saint-Jean-le-Blanc', 'Ingré'];
@@ -27,7 +41,7 @@ const devisHref = "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su
   title="Traiteur à Orléans et alentours — Le Pari's"
   description="Le Pari's, bar-restaurant à Orléans, propose ses services de traiteur pour mariages, anniversaires et événements d'entreprise, à Orléans et alentours."
   active="traiteur"
-  ogImage={photo4}
+  ogImage={traiteurPhoto3}
   jsonLd={buildTraiteurServiceSchema(zones)}
 >
   <FloatingBadge label="Demander un devis" phone="02 38 53 29 34" variant="orange" />
@@ -90,7 +104,7 @@ const devisHref = "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su
     </div>
   </div>
 
-  <Gallery eyebrow="quelques réalisations" title="Nos événements" ctaLabel="Demander un devis" ctaHref={devisHref} />
+  <Gallery eyebrow="quelques réalisations" title="Nos événements" ctaLabel="Demander un devis" ctaHref={devisHref} images={galleryImages} />
 
   <div class="section">
     <div class="wrap">
