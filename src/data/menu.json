@@ -4,9 +4,9 @@
     "title": "Les Plats",
     "items": [
       { "name": "Plat du jour", "price": "11,90€", "featured": true },
-      { "name": "Steak haché", "price": "11,90€" },
+      { "name": "Steak haché façon bouchère", "note": "125g", "price": "11,90€" },
       { "name": "Fish and chips", "price": "14,90€" },
-      { "name": "Pièce du boucher", "price": "14,90€" }
+      { "name": "Pièce du boucher", "note": "180g, suivant approvisionnement", "price": "14,90€" }
     ]
   },
   "categories": [
@@ -16,13 +16,13 @@
       "title": "Boissons chaudes",
       "icon": "chaudes",
       "items": [
-        { "name": "Café", "price": "1,70€" },
-        { "name": "Allongé", "price": "2€" },
-        { "name": "Grand café", "price": "3€" },
+        { "name": "Café / Décaféiné", "price": "1,70€" },
+        { "name": "Café allongé", "price": "2,00€" },
+        { "name": "Grand café", "price": "3,00€" },
         { "name": "Cappuccino", "price": "3,20€" },
         { "name": "Chocolat", "price": "2,80€" },
-        { "name": "Thé", "price": "2,50€" },
-        { "name": "Lait", "note": "20cl", "price": "1€" }
+        { "name": "Thé / Infusion", "price": "2,50€" },
+        { "name": "Verre de lait", "note": "20cl", "price": "1,00€" }
       ]
     },
     {
@@ -31,13 +31,13 @@
       "title": "Apéritifs",
       "icon": "aperitifs",
       "items": [
-        { "name": "Kir pétillant", "price": "4,50€" },
-        { "name": "Kir", "price": "2,50€" },
-        { "name": "Whisky Clan Campbell", "price": "5€" },
-        { "name": "Vodka", "price": "5€" },
-        { "name": "Ricard", "price": "2,50€" },
-        { "name": "Baby", "price": "2,50€" },
-        { "name": "Get 27 / Get 31", "price": "4€" }
+        { "name": "Kir pétillant", "note": "10cl", "price": "4,50€" },
+        { "name": "Kir", "note": "10cl", "price": "2,50€" },
+        { "name": "Whisky Clan Campbell", "note": "4cl", "price": "5,00€" },
+        { "name": "Vodka", "note": "4cl", "price": "5,00€" },
+        { "name": "Ricard / Pastis", "note": "2cl", "price": "2,50€" },
+        { "name": "Baby", "note": "2cl", "price": "2,50€" },
+        { "name": "Get 27 ou 31", "price": "4,00€" }
       ]
     },
     {
@@ -46,13 +46,14 @@
       "title": "Bières",
       "icon": "bieres",
       "items": [
-        { "name": "Pelforth Rouge", "note": "pression", "price": "5,20€" },
-        { "name": "SuperBock", "price": "3,50€" },
-        { "name": "Panaché / Monaco", "price": "3,30€" },
-        { "name": "1664 Blanche", "price": "4,50€" },
-        { "name": "Corona", "price": "4,50€" },
-        { "name": "Heineken", "price": "2,80€" },
-        { "name": "Affligem", "note": "pression", "price": "5,20€" }
+        { "name": "Pellican Rouge", "note": "pression, 25cl", "price": "5,20€" },
+        { "name": "Pellican Blonde", "note": "pression, 25cl", "price": "5,20€" },
+        { "name": "SuperBock", "note": "25cl", "price": "3,50€" },
+        { "name": "Panaché / Monaco", "note": "25cl", "price": "3,30€" },
+        { "name": "Bière Blanche 1664", "note": "33cl", "price": "4,50€" },
+        { "name": "Corona", "note": "33cl", "price": "4,50€" },
+        { "name": "Heineken", "note": "25cl", "price": "2,80€" },
+        { "name": "Affligem", "note": "pression, 25cl", "price": "5,20€" }
       ]
     },
     {
@@ -61,12 +62,12 @@
       "title": "Vins & Grignotage",
       "icon": "vins",
       "items": [
-        { "name": "Verre vin / cidre", "price": "5€" },
-        { "name": "Pichet", "note": "25cl", "price": "7€" },
-        { "name": "Bouteille", "price": "22€" },
-        { "name": "Saucisson", "price": "6,90€" },
-        { "name": "Crottin de chèvre", "price": "3,50€" },
-        { "name": "Glace", "price": "2,50€" }
+        { "name": "Verre de vin / cidre", "price": "5,50€" },
+        { "name": "Pichet de vin", "note": "25cl", "price": "7,00€" },
+        { "name": "Bouteille de vin", "note": "75cl", "price": "22,00€" },
+        { "name": "Saucisson sec Avistou", "note": "200g", "price": "6,90€" },
+        { "name": "Demi crottin de chèvre", "price": "3,50€" },
+        { "name": "Glaces", "note": "bâtonnet", "price": "2,50€" }
       ]
     },
     {
@@ -75,13 +76,13 @@
       "title": "Softs & Sodas",
       "icon": "softs",
       "items": [
-        { "name": "Coca", "price": "2,50€" },
-        { "name": "Red Bull", "price": "4€" },
-        { "name": "Schweppes", "price": "2,50€" },
-        { "name": "Orangina / Fanta / IceTea", "price": "2,50€" },
-        { "name": "Pago", "price": "4€" },
-        { "name": "Perrier", "price": "2,50€" },
-        { "name": "Diabolo", "price": "2€" }
+        { "name": "Coca Cola / Zéro", "note": "33cl", "price": "2,70€" },
+        { "name": "Red Bull", "note": "20cl", "price": "4,00€" },
+        { "name": "Schweppes / Agrum'", "note": "33cl", "price": "2,70€" },
+        { "name": "Orangina / Fanta / Ice Tea", "price": "2,70€" },
+        { "name": "Jus de fruit Pago", "note": "20cl", "price": "4,50€" },
+        { "name": "Perrier", "note": "33cl", "price": "2,50€" },
+        { "name": "Diabolo", "price": "2,00€" }
       ]
     },
     {
@@ -90,10 +91,10 @@
       "title": "Cocktails",
       "icon": "cocktails",
       "items": [
-        { "name": "Virgin Mojito", "price": "4,60€" },
-        { "name": "Mojito", "price": "7€" },
-        { "name": "Caïpirinha", "price": "7€" },
-        { "name": "Spritz", "price": "7€" }
+        { "name": "Virgin Mojito", "note": "sans alcool", "price": "4,60€" },
+        { "name": "Mojito", "price": "7,00€" },
+        { "name": "Caïpirinha", "price": "7,00€" },
+        { "name": "Spritz", "price": "7,00€" }
       ]
     }
   ]
