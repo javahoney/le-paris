@@ -27,6 +27,11 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W53W7332');</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -62,16 +67,10 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {jsonLdBlocks.map((block) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(block).replace(/</g, '\\u003c')} />
     ))}
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZTCK859YP"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9ZTCK859YP');
-    </script>
   </head>
   <body class:list={{ 'theme-dark': theme === 'dark' }}>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W53W7332"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <Nav theme={theme} active={active} />
     <slot />
     <Footer theme={theme} active={active} />
