@@ -1,6 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -67,6 +68,48 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {jsonLdBlocks.map((block) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(block).replace(/</g, '\\u003c')} />
     ))}
+
+    <ClientRouter />
+    <script>
+      document.addEventListener('astro:before-swap', (event) => {
+        if (event.from.pathname === event.to.pathname) {
+          event.viewTransition.skipTransition();
+        }
+      });
+    </script>
+
+    <style is:global>
+      @keyframes slide-up-out {
+        35% { opacity: 0; }
+        to { transform: translateY(-100%); opacity: 0; }
+      }
+
+      @keyframes fade-in-quick {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      ::view-transition-group(root) {
+        animation-duration: 0.75s;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      ::view-transition-old(root) {
+        animation: slide-up-out 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+      }
+
+      ::view-transition-new(root) {
+        animation: fade-in-quick 0.25s ease-out 0.5s both;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-group(*),
+        ::view-transition-old(*),
+        ::view-transition-new(*) {
+          animation: none !important;
+        }
+      }
+    </style>
   </head>
   <body class:list={{ 'theme-dark': theme === 'dark' }}>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W53W7332"
