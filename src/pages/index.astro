@@ -42,6 +42,18 @@ const galleryImages = [
   </div>
 
   <Gallery eyebrow="un aperçu" title="Chez nous" ctaLabel="Voir la carte" ctaHref="/carte" images={galleryImages} />
+
+  <div class="takeaway">
+    <div class="wrap takeaway__inner">
+      <svg class="takeaway__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5c0-1 1-2 2-2h2l2 5-2 1a11 11 0 006 6l1-2 5 2v2c0 1-1 2-2 2A15 15 0 014 5z" />
+      </svg>
+      <HandTag rotate={-3}>à emporter</HandTag>
+      <h2 class="pd">Venez prendre à emporter !</h2>
+      <p>Nos plats maison, aussi généreux à emporter qu'à table. Appelez-nous pour passer votre commande.</p>
+      <Button href="tel:0238532934" variant="primary">Appeler pour commander</Button>
+    </div>
+  </div>
 </Layout>
 
 <style>
@@ -51,8 +63,17 @@ const galleryImages = [
   .hero__phone { display: block; margin-top: 10px; }
   .hero__ctas { display: flex; justify-content: center; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
 
+  .takeaway { padding: 56px 24px; text-align: center; }
+  .takeaway__inner { display: flex; flex-direction: column; align-items: center; }
+  .takeaway__icon { width: 40px; height: 40px; color: var(--color-bordeaux); opacity: 0.35; margin-bottom: 8px; }
+  .takeaway h2 { font-size: 2rem; color: var(--color-bordeaux); font-weight: 700; margin-top: 10px; }
+  .takeaway p { font-size: 1rem; color: var(--color-text-secondary); margin-top: 14px; max-width: 480px; }
+  .takeaway :global(.btn) { margin-top: 28px; }
+
   @media (max-width: 760px) {
     .hero { padding: 70px 12px 56px; }
     .hero h1 { font-size: 2.6rem; }
+    .takeaway { padding: 56px 12px; }
+    .takeaway h2 { font-size: 1.6rem; }
   }
 </style>
