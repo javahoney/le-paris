@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoLeParis from '../assets/logo-leparis.png';
+import menuBurgerIcon from '../assets/menu-burger.svg?raw';
 
 interface Props {
   theme: 'light' | 'dark';
@@ -34,9 +35,8 @@ const links = [
       ))}
     </div>
     <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span class="nav__burger-icon" set:html={menuBurgerIcon} />
+      <span class="nav__burger-close" aria-hidden="true"></span>
     </button>
   </div>
   <div class="nav__mobile-panel" id="navMobilePanel">
@@ -88,27 +88,50 @@ const links = [
   .nav__burger {
     display: none;
     position: relative;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     padding: 0;
     background: none;
     border: none;
     cursor: pointer;
   }
-  .nav__burger span {
+  .nav__burger-icon {
+    display: block;
+    position: absolute;
+    inset: 0;
+    color: var(--color-bordeaux);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav__burger-icon :global(svg) {
     display: block;
     width: 100%;
+    height: 100%;
+  }
+  .nav__burger-close {
+    display: block;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav__burger-close::before,
+  .nav__burger-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
     height: 3px;
     background: var(--color-bordeaux);
     border-radius: 2px;
-    transition: transform 0.2s, opacity 0.2s;
   }
-  .nav__burger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-  .nav__burger.open span:nth-child(2) { opacity: 0; }
-  .nav__burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  .nav__burger-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .nav__burger-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+  .nav__burger.open .nav__burger-icon { opacity: 0; transform: scale(0.6); }
+  .nav__burger.open .nav__burger-close { opacity: 1; transform: scale(1); pointer-events: auto; }
 
   .nav__mobile-panel {
     display: none;
@@ -140,24 +163,30 @@ const links = [
   }
   .nav--dark .navlink.active,
   .nav--dark .navlink:hover { background: var(--color-orange); color: var(--color-dark-nav); border-color: var(--color-orange); }
-  .nav--dark .nav__burger span { background: var(--color-orange); }
+  .nav--dark .nav__burger-icon { color: var(--color-orange); }
+  .nav--dark .nav__burger-close::before,
+  .nav--dark .nav__burger-close::after { background: var(--color-orange); }
   .nav--dark .navlink--call { color: var(--color-creme); border-color: var(--color-green); }
 
   @media (max-width: 760px) {
     .nav__inner { padding: 16px 12px; }
     .nav__links { display: none; }
-    .nav__burger { display: flex; }
+    .nav__burger { display: block; margin-right: 10px; }
   }
 </style>
 
 <script>
-  document.querySelectorAll<HTMLButtonElement>('.nav__burger').forEach((burger) => {
-    const panel = burger.parentElement?.parentElement?.querySelector<HTMLElement>('.nav__mobile-panel');
-    burger.addEventListener('click', () => {
-      const isOpen = panel?.classList.toggle('open');
-      burger.classList.toggle('open', !!isOpen);
-      burger.setAttribute('aria-expanded', String(!!isOpen));
-      burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+  function initNavBurger() {
+    document.querySelectorAll<HTMLButtonElement>('.nav__burger').forEach((burger) => {
+      const panel = burger.parentElement?.parentElement?.querySelector<HTMLElement>('.nav__mobile-panel');
+      burger.addEventListener('click', () => {
+        const isOpen = panel?.classList.toggle('open');
+        burger.classList.toggle('open', !!isOpen);
+        burger.setAttribute('aria-expanded', String(!!isOpen));
+        burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+      });
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initNavBurger);
 </script>
