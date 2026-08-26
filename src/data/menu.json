@@ -3,10 +3,10 @@
     "eyebrow": "à manger",
     "title": "Les Plats",
     "items": [
-      { "name": "Plat du jour", "price": "11,90€", "featured": true },
-      { "name": "Steak haché façon bouchère", "note": "125g", "price": "11,90€" },
-      { "name": "Fish and chips", "price": "14,90€" },
-      { "name": "Pièce du boucher", "note": "180g, suivant approvisionnement", "price": "14,90€" }
+      { "name": "Plat du jour", "price": "12,50€", "featured": true },
+      { "name": "Steak haché façon bouchère", "note": "125g", "price": "12,50€" },
+      { "name": "Fish and chips", "price": "15,00€" },
+      { "name": "Pièce du boucher", "note": "180g, suivant approvisionnement", "price": "15,00€" }
     ]
   },
   "categories": [
